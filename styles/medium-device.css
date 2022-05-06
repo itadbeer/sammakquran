@@ -1,0 +1,173 @@
+.header-container {
+  height: 64px;
+}
+
+.header-logo img {
+  height: 64px;
+}
+
+.header-search {
+  margin-right: 24px;
+}
+
+.search-input {
+  padding: 0 24px 0 64px;
+}
+
+.search-button {
+  width: 44px;
+  height: 44px;
+}
+
+.posts-grid {
+  margin: 0 -12px;
+}
+
+.post-container {
+  width: 50%;
+  padding: 0 12px;
+  margin-bottom: 24px;
+}
+
+.view-more-container {
+  margin-top: 24px;
+  margin-bottom: 48px;
+}
+
+.bottom-nav {
+  bottom: 24px;
+
+  padding: 0 24px;
+}
+
+.bottom-nav-face {
+  max-width: 512px;
+  border-radius: 16px;
+
+  box-shadow: 0 0 4px 4px rgba(0, 0, 0, .24);
+}
+
+.bottom-nav-item:first-child {
+  border-radius: 0 16px 16px 0;
+}
+
+.bottom-nav-item:last-child {
+  border-radius: 16px 0 0 16px;
+}
+
+.footer {
+  padding: 48px 24px;
+}
+
+.nav-reserved-space {
+  height: 88px;
+}
+
+.header-carousel {
+  width: calc(100% + 32px);
+  margin: 0 -16px;
+}
+
+.header-carousel .splide__track {
+  padding: 24px 16px !important;
+  margin-bottom: 0;
+}
+
+.header-carousel .splide__arrows {
+  padding: 0 24px;
+}
+
+.categories-carousel {
+  width: calc(100% + 16px);
+  margin: 0 -8px;
+}
+
+.categories-carousel .splide__track {
+  padding: 24px 8px !important;
+}
+
+.categories-carousel .splide__arrows {
+  display: flex;
+}
+
+.posts-carousel {
+  width: calc(100% + 32px);
+  margin: 0 -16px;
+}
+
+.posts-carousel .splide__track {
+  padding: 24px 16px !important;
+}
+
+.carousel-header {
+  padding: 24px 16px 0;
+}
+
+.carousel-header .splide__arrows {
+  display: flex;
+
+  margin-right: auto;
+}
+
+.posts-carousel .post-container {
+  width: 100%;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.about-section {
+  flex-direction: row;
+}
+
+.about-img {
+  width: calc(50% - 12px);
+  margin-bottom: 0;
+  margin-left: 12px;
+}
+
+.about-text {
+  width: calc(50% - 12px);
+  margin-top: 0;
+  margin-right: 12px;
+}
+
+.audio-content {
+  position: sticky;
+  top: 24px;
+}
+
+.playlist-posts {
+  margin-bottom: 0;
+}
+
+.playlist-posts > h2 {
+  margin-bottom: 24px;
+}
+
+.single-video {
+  position: sticky;
+  top: 24px;
+}
+
+.dbl-column {
+  flex-direction: row;
+
+  margin: 0 12px;
+}
+
+.dc-column {
+  width: 50%;
+  padding: 0 12px;
+}
+
+.dc-column .post-container {
+  width: 100%;
+  padding: 0;
+}
+
+.main-video {
+  position: static;
+  
+  width: 100%;
+  margin: 0 0 24px;
+}

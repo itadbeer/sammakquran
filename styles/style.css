@@ -1183,10 +1183,10 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
 .blog-content,
 .audio-content,
 .video-content {
+  width: 100%;
   padding: 16px;
   margin-bottom: 24px;
   border-radius: 16px;
-
   background-color: var(--color-primary-100);
 }
 
@@ -1289,7 +1289,9 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
 
   width: 100%;
 }
-
+.dc-column {
+  width: 100%;
+}
 .main-video {
   position: sticky;
   top: 0;

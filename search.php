@@ -16,7 +16,7 @@ $args = [
 ];
 $query = new WP_Query($args);
 ?>
-<main class="main flex column ai-center max-width">
+<main class="main flex column ai-center max-width fluid-width">
     <header class="main-header relative">
         <h1 class="main-title"><?php get_search_query(); ?></h1>
         <button class="button-container button-48" onclick="openFilters()">
@@ -29,7 +29,6 @@ $query = new WP_Query($args);
     </header>
 
     <div id="filtersOverlay">
-        <div id="backgroundOverlay"></div>
         <form id="filters">
             <h2 class="filters-heading">فیلترها</h2>
             <h3 class="filters-category">دسته</h3>

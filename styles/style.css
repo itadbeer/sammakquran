@@ -1523,7 +1523,7 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
 
 #snackbar {
   position: fixed;
-  bottom: 24px;
+  bottom: 88px;
   left: 0;
   z-index: 6;
 

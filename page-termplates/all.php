@@ -10,7 +10,7 @@ $query = new WP_Query(
     )
 );
 ?>
-<main class="main flex column ai-center max-width">
+<main class="main flex column ai-center max-width fluid-width">
     <header class="main-header relative">
         <h1 class="main-title">همه</h1>
         <button class="button-container button-48" onclick="openFilters()">

@@ -64,6 +64,8 @@ picture {
 
   max-width: 100%;
   height: auto;
+
+  background-color: var(--color-primary-300);
 }
 
 input,
@@ -1206,8 +1208,6 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
 
 .blog-content img {
   border-radius: 8px;
-
-  background-color: var(--color-primary-300);
 }
 
 .blog-content > * {

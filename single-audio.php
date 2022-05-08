@@ -30,7 +30,7 @@ $found_posts_count = $query->found_posts;
                     <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/audio.svg" alt="صدا">
                 </div>
             </a>
-            <a class="button-container button-56" href="<?php echo "#" ?>">
+            <a class="button-container button-56" href="<?php echo get_term_link($playlist); ?>">
                 <div class="button-face ghost-button text-button">
                     <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/playlist.svg" alt="لیست پخش">
                     <div class="button-text"><?php echo $found_posts_count; ?></div>

@@ -44,7 +44,7 @@ switch ($playlist_type) {
           <img class="button-icon post-type-indicator" src="<?php echo $play_list_type_icon; ?>" alt="">
         </div>
       </a>
-      <a class="button-container button-56" href="playlist.html">
+      <a class="button-container button-56" href="<?php echo get_queried_object()->the_permalink; ?>">
         <div class="button-face ghost-button text-button">
           <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/playlist.svg" alt="لیست پخش">
           <div class="button-text"><?php echo $count; ?></div>

@@ -29,7 +29,6 @@ $query = new WP_Query($args);
     </header>
 
     <div id="filtersOverlay">
-        <div id="backgroundOverlay"></div>
         <form id="filters">
             <h2 class="filters-heading">فیلترها</h2>
             <h3 class="filters-category">دسته</h3>

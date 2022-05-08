@@ -91,44 +91,46 @@ get_header();
       </div>
     </div>
   </section>
-  <section class="splide posts-carousel" aria-label="جدیدترین ویدیوها">
-    <header class="carousel-header flex ai-center">
-      <img class="carousel-icon" src="<?php echo get_template_directory_uri(); ?>/icons/video.svg" alt="ویدیو">
-      <h1 class="main-title">جدیدترین ویدیوها</h1>
-      <div class="splide__arrows flex">
-        <button class="splide__arrow splide__arrow--prev button-container button-32">
-          <div class="button-face green-button">
-            <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="قبلی">
-            <div class="button-glow"></div>
-            <div class="button-hover"></div>
-          </div>
-          <div class="button-hitbox"></div>
-        </button>
-        <button class="splide__arrow splide__arrow--next button-container button-32">
-          <div class="button-face green-button">
-            <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="بعدی">
-            <div class="button-glow"></div>
-            <div class="button-hover"></div>
-          </div>
-          <div class="button-hitbox"></div>
-        </button>
-      </div>
-    </header>
-    <div class="splide__track">
-      <ul class="splide__list">
-        <?php
-        $query = new WP_Query(array(
-          'tax_query' => array(
-            array(
-              'taxonomy' => 'post_format',
-              'field' => 'slug',
-              'terms' => ['post-format-video'],
-              'orderby' => "date",
-              'order' => 'DESC'
-            )
-          )
-        ));
-        if ($query->have_posts()) {
+  <?php
+  $query = new WP_Query(array(
+    'tax_query' => array(
+      array(
+        'taxonomy' => 'post_format',
+        'field' => 'slug',
+        'terms' => ['post-format-video'],
+        'orderby' => "date",
+        'order' => 'DESC'
+      )
+    )
+  ));
+  if ($query->have_posts()) {
+  ?>
+    <section class="splide posts-carousel" aria-label="جدیدترین ویدیوها">
+      <header class="carousel-header flex ai-center">
+        <img class="carousel-icon" src="<?php echo get_template_directory_uri(); ?>/icons/video.svg" alt="ویدیو">
+        <h1 class="main-title">جدیدترین ویدیوها</h1>
+        <div class="splide__arrows flex">
+          <button class="splide__arrow splide__arrow--prev button-container button-32">
+            <div class="button-face green-button">
+              <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="قبلی">
+              <div class="button-glow"></div>
+              <div class="button-hover"></div>
+            </div>
+            <div class="button-hitbox"></div>
+          </button>
+          <button class="splide__arrow splide__arrow--next button-container button-32">
+            <div class="button-face green-button">
+              <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="بعدی">
+              <div class="button-glow"></div>
+              <div class="button-hover"></div>
+            </div>
+            <div class="button-hitbox"></div>
+          </button>
+        </div>
+      </header>
+      <div class="splide__track">
+        <ul class="splide__list">
+          <?php
           while ($query->have_posts()) {
             $query->the_post();
             echo '<li class="splide__slide">';
@@ -136,49 +138,52 @@ get_header();
             echo '</li>';
           }
           wp_reset_postdata();
-        }
-        ?>
-      </ul>
-    </div>
-  </section>
-  <section class="splide posts-carousel" aria-label="جدیدترین صداها">
-    <header class="carousel-header flex ai-center">
-      <img class="carousel-icon" src="<?php echo get_template_directory_uri(); ?>/icons/audio.svg" alt="صدا">
-      <h1 class="main-title">جدیدترین صداها</h1>
-      <div class="splide__arrows flex">
-        <button class="splide__arrow splide__arrow--prev button-container button-32">
-          <div class="button-face green-button">
-            <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="قبلی">
-            <div class="button-glow"></div>
-            <div class="button-hover"></div>
-          </div>
-          <div class="button-hitbox"></div>
-        </button>
-        <button class="splide__arrow splide__arrow--next button-container button-32">
-          <div class="button-face green-button">
-            <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="بعدی">
-            <div class="button-glow"></div>
-            <div class="button-hover"></div>
-          </div>
-          <div class="button-hitbox"></div>
-        </button>
+          ?>
+        </ul>
       </div>
-    </header>
-    <div class="splide__track">
-      <ul class="splide__list">
-        <?php
-        $query = new WP_Query(array(
-          'tax_query' => array(
-            array(
-              'taxonomy' => 'post_format',
-              'field' => 'slug',
-              'terms' => ['post-format-audio'],
-              'orderby' => "date",
-              'order' => 'DESC'
-            )
-          )
-        ));
-        if ($query->have_posts()) {
+    </section>
+  <?php } ?>
+
+  <?php
+  $query = new WP_Query(array(
+    'tax_query' => array(
+      array(
+        'taxonomy' => 'post_format',
+        'field' => 'slug',
+        'terms' => ['post-format-audio'],
+        'orderby' => "date",
+        'order' => 'DESC'
+      )
+    )
+  ));
+  if ($query->have_posts()) {
+  ?>
+    <section class="splide posts-carousel" aria-label="جدیدترین صداها">
+      <header class="carousel-header flex ai-center">
+        <img class="carousel-icon" src="<?php echo get_template_directory_uri(); ?>/icons/audio.svg" alt="صدا">
+        <h1 class="main-title">جدیدترین صداها</h1>
+        <div class="splide__arrows flex">
+          <button class="splide__arrow splide__arrow--prev button-container button-32">
+            <div class="button-face green-button">
+              <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="قبلی">
+              <div class="button-glow"></div>
+              <div class="button-hover"></div>
+            </div>
+            <div class="button-hitbox"></div>
+          </button>
+          <button class="splide__arrow splide__arrow--next button-container button-32">
+            <div class="button-face green-button">
+              <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="بعدی">
+              <div class="button-glow"></div>
+              <div class="button-hover"></div>
+            </div>
+            <div class="button-hitbox"></div>
+          </button>
+        </div>
+      </header>
+      <div class="splide__track">
+        <ul class="splide__list">
+          <?php
           while ($query->have_posts()) {
             $query->the_post();
             echo '<li class="splide__slide">';
@@ -186,60 +191,63 @@ get_header();
             echo '</li>';
           }
           wp_reset_postdata();
-        }
-        ?>
-      </ul>
-    </div>
-  </section>
-  <section class="splide posts-carousel" aria-label="جدیدترین نوشته‌ها">
-    <header class="carousel-header flex ai-center">
-      <img class="carousel-icon" src="<?php echo get_template_directory_uri(); ?>/icons/blog.svg" alt="مقاله">
-      <h1 class="main-title">جدیدترین نوشته‌ها</h1>
-      <div class="splide__arrows flex">
-        <button class="splide__arrow splide__arrow--prev button-container button-32">
-          <div class="button-face green-button">
-            <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="قبلی">
-            <div class="button-glow"></div>
-            <div class="button-hover"></div>
-          </div>
-          <div class="button-hitbox"></div>
-        </button>
-        <button class="splide__arrow splide__arrow--next button-container button-32">
-          <div class="button-face green-button">
-            <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="بعدی">
-            <div class="button-glow"></div>
-            <div class="button-hover"></div>
-          </div>
-          <div class="button-hitbox"></div>
-        </button>
+
+          ?>
+        </ul>
       </div>
-    </header>
-    <div class="splide__track">
-      <ul class="splide__list">
-        <?php
-        $query = new WP_Query(array(
-          'tax_query' => array(
-            array(
-              'taxonomy' => 'post_format',
-              'field' => 'slug',
-              'terms' => array(
-                'post-format-aside',
-                'post-format-audio',
-                'post-format-chat',
-                'post-format-gallery',
-                'post-format-image',
-                'post-format-link',
-                'post-format-quote',
-                'post-format-status',
-                'post-format-video'
-              ),
-              'orderby' => "date",
-              'order' => 'DESC',
-              'operator' => 'NOT IN'
-            )
-          )
-        ));
-        if ($query->have_posts()) {
+    </section>
+  <?php } ?>
+
+  <?php
+  $query = new WP_Query(array(
+    'tax_query' => array(
+      array(
+        'taxonomy' => 'post_format',
+        'field' => 'slug',
+        'terms' => array(
+          'post-format-aside',
+          'post-format-audio',
+          'post-format-chat',
+          'post-format-gallery',
+          'post-format-image',
+          'post-format-link',
+          'post-format-quote',
+          'post-format-status',
+          'post-format-video'
+        ),
+        'orderby' => "date",
+        'order' => 'DESC',
+        'operator' => 'NOT IN'
+      )
+    )
+  ));
+  if ($query->have_posts()) { ?>
+    <section class="splide posts-carousel" aria-label="جدیدترین نوشته‌ها">
+      <header class="carousel-header flex ai-center">
+        <img class="carousel-icon" src="<?php echo get_template_directory_uri(); ?>/icons/blog.svg" alt="مقاله">
+        <h1 class="main-title">جدیدترین نوشته‌ها</h1>
+        <div class="splide__arrows flex">
+          <button class="splide__arrow splide__arrow--prev button-container button-32">
+            <div class="button-face green-button">
+              <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="قبلی">
+              <div class="button-glow"></div>
+              <div class="button-hover"></div>
+            </div>
+            <div class="button-hitbox"></div>
+          </button>
+          <button class="splide__arrow splide__arrow--next button-container button-32">
+            <div class="button-face green-button">
+              <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="بعدی">
+              <div class="button-glow"></div>
+              <div class="button-hover"></div>
+            </div>
+            <div class="button-hitbox"></div>
+          </button>
+        </div>
+      </header>
+      <div class="splide__track">
+        <ul class="splide__list">
+          <?php
           while ($query->have_posts()) {
             $query->the_post();
             echo '<li class="splide__slide">';
@@ -247,11 +255,13 @@ get_header();
             echo '</li>';
           }
           wp_reset_postdata();
-        }
-        ?>
-      </ul>
-    </div>
-  </section>
+
+          ?>
+        </ul>
+      </div>
+    </section>
+  <?php } ?>
+
   <section class="about-section flex ai-center revealable">
     <div class="about-img flex jc-center">
       <?php

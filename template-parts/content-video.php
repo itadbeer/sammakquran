@@ -1,5 +1,13 @@
 <?php
 $playlist = wp_get_post_terms(get_the_ID(), 'playlists')[0]->name;
+$content = get_the_content();
+$video_src = [];
+preg_match_all('/(src)=("[^"]*")/i', $content, $video_src);
+if (count($video_src[2]) > 0) {
+    $video_src = (str_replace('"', '', $video_src[2][0]));
+} else {
+    $video_src = "";
+}
 ?>
 <div class="post-container revealable">
     <a class="prevent-default" href="<?php the_permalink(); ?>">
@@ -16,7 +24,7 @@ $playlist = wp_get_post_terms(get_the_ID(), 'playlists')[0]->name;
                     <img src="<?php echo get_template_directory_uri(); ?>/icons/playlist.svg" alt="لیست پخش">
                     <span><?php echo $playlist; ?></span>
                 </div>
-                <div class="post-duration">10:37</div>
+                <div class="post-duration"><?php echo get_media_duration($video_src); ?></div>
             </div>
             <h2 class="post-title"><?php echo get_the_title(); ?></h2>
             <div class="post-info">

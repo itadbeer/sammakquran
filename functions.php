@@ -170,7 +170,7 @@ function strip_tags_content(string $content, $tags = [])
 function get_media_duration(string $url)
 {
     $metadata = wp_read_audio_metadata(ContentUrlToLocalPath($url));
-    return $metadata == false ? "00:00" : $metadata['length_formatted'];
+    return $metadata == false ? "0:00" : $metadata['length_formatted'];
 }
 
 function ContentUrlToLocalPath($url)

@@ -4,6 +4,7 @@
 if (!defined('ABSPATH')) {
     exit;
 }
+require_once(ABSPATH . 'wp-admin/includes/media.php');
 require_once('includes/slider.php');
 
 // Add theme supports
@@ -164,4 +165,17 @@ add_action('admin_head', 'fix_svg');
 function strip_tags_content(string $content, $tags = [])
 {
     return strip_tags($content, $tags);
+}
+
+function get_media_duration(string $url)
+{
+    $metadata = wp_read_audio_metadata(ContentUrlToLocalPath($url));
+    return $metadata == false ? "00:00" : $metadata['length_formatted'];
+}
+
+function ContentUrlToLocalPath($url)
+{
+    preg_match('/.*(\/wp\-content\/uploads\/\d+\/\d+\/.*)/', $url, $mat);
+    if (count($mat) > 0) return ABSPATH . $mat[1];
+    return '';
 }

@@ -65,6 +65,6 @@ audio.addEventListener('pause', function () {
   get(ui.play).classList.add('paused')
 });
 
-window.addEventListener('load', function () {
-  get(ui.duration).innerText = formatTime(audio.duration);
-})
+// window.addEventListener('load', function () {
+//   get(ui.duration).innerText = formatTime(audio.duration);
+// })

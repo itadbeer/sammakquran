@@ -135,7 +135,7 @@ if (count($audio_src[2]) > 0) {
                             <div class="audio-timeline-face" id="timelineFace"></div>
                         </div>
                         <div class="flex jc-sb">
-                            <span id="audioDuration">0:00</span>
+                            <span id="audioDuration"><?php echo get_media_duration($audio_src); ?></span>
                             <span id="audioCurrentTime">0:00</span>
                         </div>
                     </div>

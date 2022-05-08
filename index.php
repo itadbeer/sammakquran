@@ -252,7 +252,7 @@ get_header();
       </ul>
     </div>
   </section>
-  <section class="about-section flex ai-center">
+  <section class="about-section flex ai-center revealable">
     <div class="about-img flex jc-center">
       <?php
       $page = get_page_by_path('about');

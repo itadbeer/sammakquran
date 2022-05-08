@@ -36,7 +36,7 @@ get_header();
         </div>
     </header>
 
-    <article class="single single-blog">
+    <article class="single single-blog about-page">
         <h1 class="main-title"><?php echo get_the_title(); ?></h1>
         <div class="blog-content">
             <?php echo the_content(); ?>

@@ -5,6 +5,7 @@
 </div>
 
 <script src="<?php echo get_template_directory_uri(); ?>/scripts/main.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/scripts/menu-handler.js"></script>
 </body>
 
 </html>

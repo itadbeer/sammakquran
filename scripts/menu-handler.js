@@ -16,7 +16,7 @@ function handle_navbar_active_item(){
       document.querySelector(".bottom-nav-icon[src*='all.svg']").parentElement.parentElement.classList.add("active");
     }
   }
-  let navbar_active_item_handled = document.querySelectorAll(".bottom-nav-item.active").length>0;;
+  let navbar_active_item_handled = document.querySelectorAll(".bottom-nav-item.active").length>0;
   if(navbar_active_item_handled === false){
-  // handle_navbar_active_item();
+  handle_navbar_active_item();
   }

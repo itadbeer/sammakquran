@@ -257,7 +257,7 @@ get_header();
       <?php
       $page = get_page_by_path('about');
       $thumbnail_id = get_post_thumbnail_id($page);
-      $thumbnail_src = get_the_post_thumbnail_url($page) ? get_the_post_thumbnail_url($page) : get_template_directory_uri() . "/images/thumbnail.jpg";
+      $thumbnail_src = get_the_post_thumbnail_url($page) ? get_the_post_thumbnail_url($page) : get_template_directory_uri() . "/images/placeholder.svg";
       $thumbnail_alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true) == "" ? get_the_title() : get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
       ?>
       <img src="<?php echo $thumbnail_src; ?>" alt="<?php echo $thumbnail_alt; ?>">

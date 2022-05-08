@@ -159,3 +159,9 @@ function fix_svg()
     echo '';
 }
 add_action('admin_head', 'fix_svg');
+
+
+function strip_tags_content(string $content, $tags = [])
+{
+    return strip_tags($content, $tags);
+}

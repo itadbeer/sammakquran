@@ -14,6 +14,14 @@ $args = array(
 );
 $query = new WP_Query($args);
 $found_posts_count = $query->found_posts;
+$content = get_the_content();
+$audio_src = [];
+preg_match_all('/(src)=("[^"]*")/i', $content, $audio_src);
+if (count($audio_src[2]) > 0) {
+    $audio_src = (str_replace('"', '', $audio_src[2][0]));
+} else {
+    $audio_src = null;
+}
 ?>
 <main class="main max-width">
     <header class="main-header relative">
@@ -67,7 +75,7 @@ $found_posts_count = $query->found_posts;
         <article class="flex column ai-center single single-audio dc-column">
             <?php
             $thumbnail_id = get_post_thumbnail_id(get_the_ID());
-            $thumbnail_src = get_the_post_thumbnail_url() ? get_the_post_thumbnail_url() : get_template_directory_uri() . "/images/thumbnail.jpg";
+            $thumbnail_src = get_the_post_thumbnail_url() ? get_the_post_thumbnail_url() : get_template_directory_uri() . "/images/placeholder.svg";
             $thumbnail_alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true) == "" ? get_the_title() : get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
             ?>
 
@@ -98,41 +106,45 @@ $found_posts_count = $query->found_posts;
                 </div>
             </a>
             <div class="audio-content">
-                <div class="audio-controls">
-                    <audio id="audio" src="https://freepd.com/music/The%20Celebrated%20Minuet.mp3"></audio>
-                    <div class="flex jc-center ai-center">
-                        <button id="rewindButton" class="button-container button-48">
-                            <div class="button-face white-button">
-                                <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/rewind.svg" alt="10 ثانیه عقب">
-                                <div class="button-hover"></div>
-                            </div>
-                        </button>
-                        <button id="playButton" class="button-container button-56 play-button paused    ">
-                            <div class="button-face yellow-button">
-                                <img class="button-icon play-icon" src="<?php echo get_template_directory_uri(); ?>/icons/play.svg" alt="پخش">
-                                <img class="button-icon pause-icon" src="<?php echo get_template_directory_uri(); ?>/icons/pause.svg" alt="توقف">
-                                <div class="button-hover"></div>
-                            </div>
-                        </button>
-                        <button id="forwardButton" class="button-container button-48">
-                            <div class="button-face white-button">
-                                <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/forward.svg" alt="10 ثانیه جلو">
-                                <div class="button-hover"></div>
-                            </div>
-                        </button>
+                <?php if ($audio_src != null) { ?>
+                    <div class="audio-controls">
+                        <audio id="audio" src="<?php echo $audio_src; ?>"></audio>
+                        <div class="flex jc-center ai-center">
+                            <button id="rewindButton" class="button-container button-48">
+                                <div class="button-face white-button">
+                                    <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/rewind.svg" alt="10 ثانیه عقب">
+                                    <div class="button-hover"></div>
+                                </div>
+                            </button>
+                            <button id="playButton" class="button-container button-56 play-button paused    ">
+                                <div class="button-face yellow-button">
+                                    <img class="button-icon play-icon" src="<?php echo get_template_directory_uri(); ?>/icons/play.svg" alt="پخش">
+                                    <img class="button-icon pause-icon" src="<?php echo get_template_directory_uri(); ?>/icons/pause.svg" alt="توقف">
+                                    <div class="button-hover"></div>
+                                </div>
+                            </button>
+                            <button id="forwardButton" class="button-container button-48">
+                                <div class="button-face white-button">
+                                    <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/forward.svg" alt="10 ثانیه جلو">
+                                    <div class="button-hover"></div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="audio-timeline-container">
+                            <input class="audio-timeline" id="timelineController" type="range" min="0" max="100" value="0">
+                            <div class="audio-timeline-face" id="timelineFace"></div>
+                        </div>
+                        <div class="flex jc-sb">
+                            <span id="audioDuration">00:00</span>
+                            <span id="audioCurrentTime">00:00</span>
+                        </div>
                     </div>
-                    <div class="audio-timeline-container">
-                        <input class="audio-timeline" id="timelineController" type="range" min="0" max="100" value="0">
-                        <div class="audio-timeline-face" id="timelineFace"></div>
-                    </div>
-                    <div class="flex jc-sb">
-                        <span id="audioDuration">00:00</span>
-                        <span id="audioCurrentTime">00:00</span>
-                    </div>
-                </div>
+                <?php } ?>
                 <h2>توضیحات</h2>
-                <?php echo the_content(); ?>
+                <?php
+                echo strip_tags_content($content, ["<a>", "<b>", "<i>", "<u>", "<strong>", "<em>", "<p>", "<br>"]); ?>
             </div>
+
         </article>
         <section class="dc-column playlist-posts">
             <h2>قسمت‌های دیگر این مجموعه</h2>

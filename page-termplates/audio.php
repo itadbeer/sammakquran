@@ -2,8 +2,10 @@
     Template Name: صفحه صدا ها
 */
 get_header();
+$pageNumber = $_GET['pageNumber'] ?? 1;
 global $query;
 $query = new WP_Query(array(
+    'posts_per_page' => intval(get_option('posts_per_page')) * $pageNumber,
     'tax_query' => array(
         array(
             'taxonomy' => 'post_format',
@@ -104,14 +106,17 @@ $query = new WP_Query(array(
         wp_reset_postdata();
         ?>
     </section>
-    <div class="view-more-container flex jc-center">
-        <button class="button-container button-48">
-            <div class="button-face yellow-button text-button">
-                <div class="button-text">بیشتر</div>
-                <div class="button-glow"></div>
-                <div class="button-hover"></div>
-            </div>
-        </button>
-    </div>
+    <?php if ($query->max_num_pages > 1) { ?>
+        <div class="view-more-container flex jc-center">
+            <button class="button-container button-48">
+                <div class="button-face yellow-button text-button">
+                    <div class="button-text">بیشتر</div>
+                    <div class="button-glow"></div>
+                    <div class="button-hover"></div>
+                </div>
+            </button>
+        </div>
+    <?php } ?>
 </main>
+<script src="<?php echo get_template_directory_uri(); ?>/scripts/load_more_post.js"></script>
 <?php echo get_footer(); ?>

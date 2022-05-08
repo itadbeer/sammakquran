@@ -1,5 +1,5 @@
 <?php
-$playlist = wp_get_post_terms(get_the_ID(), 'playlists')[0]->name;
+$playlist = wp_get_post_terms(get_the_ID(), 'playlists')[0]?->name ?? null;
 $content = get_the_content();
 $audio_src = [];
 preg_match_all('/(src)=("[^"]*")/i', $content, $audio_src);
@@ -31,10 +31,14 @@ if (count($audio_src[2]) > 0) {
                 </div>
             </div>
             <div class="flex fw-wrap jc-sb ai-end">
+
                 <div class="post-playlist">
-                    <img src="<?php echo get_template_directory_uri(); ?>/icons/playlist.svg" alt="لیست پخش">
-                    <span><?php echo $playlist; ?></span>
+                    <?php if (!is_null($playlist)) { ?>
+                        <img src="<?php echo get_template_directory_uri(); ?>/icons/playlist.svg" alt="لیست پخش">
+                        <span><?php echo $playlist; ?></span>
+                    <?php } ?>
                 </div>
+
                 <div class="post-duration"><?php echo get_media_duration($audio_src); ?></div>
             </div>
         </div>

@@ -23,41 +23,14 @@
                 $custom_logo_id = get_theme_mod('custom_logo');
                 $logo_src = wp_get_attachment_image_src($custom_logo_id, 'full')[0];
                 if (has_custom_logo()) {
-                    echo '<img src="' . esc_url($logo_src) . '" alt="' . get_bloginfo('name') . '">';
+                    $logo_alt = get_post_meta($custom_logo_id, '_wp_attachment_image_alt', true) == "" ? get_bloginfo('name') : get_post_meta($custom_logo_id, '_wp_attachment_image_alt', true);
+                    echo '<img src="' . esc_url($logo_src) . '" alt="' . $logo_alt . '">';
                 } else {
-                    echo '<img src="' . get_template_directory_uri() . '/images/logo.png" alt="">';
+                    echo '<img src="' . get_template_directory_uri() . '/images/logo.png" alt="' . get_bloginfo('name') . '">';
                 }
                 ?>
             </a>
             <?php get_search_form(); ?>
         </div>
     </header>
-
-    <nav class="bottom-nav">
-        <ul class="bottom-nav-face">
-            <li class="bottom-nav-item active">
-                <a class="prevent-default" href="">
-                    <img class="bottom-nav-icon" src="<?php echo get_template_directory_uri(); ?>/icons/all.svg" alt="">
-                    <span class="bottom-nav-label">همه</span>
-                </a>
-            </li>
-            <li class="bottom-nav-item">
-                <a class="prevent-default" href="">
-                    <img class="bottom-nav-icon" src="<?php echo get_template_directory_uri(); ?>/icons/video.svg" alt="">
-                    <span class="bottom-nav-label">ویدیوها</span>
-                </a>
-            </li>
-            <li class="bottom-nav-item">
-                <a class="prevent-default" href="">
-                    <img class="bottom-nav-icon" src="<?php echo get_template_directory_uri(); ?>/icons/audio.svg" alt="">
-                    <span class="bottom-nav-label">صداها</span>
-                </a>
-            </li>
-            <li class="bottom-nav-item">
-                <a class="prevent-default" href="">
-                    <img class="bottom-nav-icon" src="<?php echo get_template_directory_uri(); ?>/icons/blog.svg" alt="">
-                    <span class="bottom-nav-label">نوشته‌ها</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+    <?php get_template_part('bottom-nav'); ?>

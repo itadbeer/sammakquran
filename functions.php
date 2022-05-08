@@ -4,6 +4,7 @@
 if (!defined('ABSPATH')) {
     exit;
 }
+require_once('includes/slider.php');
 
 // Add theme supports
 function SammakQuran_theme_support()
@@ -13,19 +14,6 @@ function SammakQuran_theme_support()
     add_theme_support('post-thumbnails');
 }
 add_action('after_setup_theme', 'SammakQuran_theme_support');
-
-// footer widgets
-function SammakQuran_footer_widgets()
-{
-    register_sidebar(array(
-        'name' => __('درباره سماک قران', 'SammakQuran'),
-        'id' => 'sammak-quran-about',
-        'description' => __('اینجا متنی درباره سماک قران بنویسید', 'SammakQuran'),
-        'before_widget' => '<div class="about-text flex column">',
-        'after_widget' => '</div>',
-    ));
-}
-add_action('widgets_init', 'SammakQuran_footer_widgets');
 
 add_theme_support('post-formats', array('video', 'audio'));
 
@@ -52,7 +40,8 @@ register_taxonomy(
         'show_in_rest' => true,
         'show_admin_column' => true,
         'query_var' => true,
-        'rewrite' => array('slug' => 'playlist'),
+        'rewrite' => array('slug' => 'playlists'),
+        'show_in_quick_edit' => true,
     ]
 );
 
@@ -71,7 +60,7 @@ function how_many_days_ago_updated()
 
 // Adding custom field to playlists taxonomy
 $taxonomyName = "playlists";
-function add_tax_field_oncreate($term)
+function add_tax_field_oncreate()
 {
     echo "<div class='form-field'>";
     echo "<label for='playlist_type'>نوع مجموعه </label>";
@@ -84,8 +73,7 @@ function add_tax_field_oncreate($term)
 function add_tax_field_onedit($term)
 {
     $termID = $term->term_id;
-    global $taxonomyName;
-    $termMeta = get_option($taxonomyName . '_' . $termID);
+    $termMeta = get_option($termID);
     $playlist_type = $termMeta['playlist_type'];
     echo "<div class='form-field'>";
     echo "<label for='playlist_type'>نوع مجموعه: </label>";
@@ -96,16 +84,78 @@ function add_tax_field_onedit($term)
 }
 function save_custom_tax_field($termID)
 {
-    global $taxonomyName;
     if (isset($_POST['playlist_type'])) {
-        $termMeta = get_option($taxonomyName . '_' . $termID);
+        $termMeta = get_option($termID);
         if (!is_array($termMeta))
-            $termMeta = array();
+            $termMeta = [];
         $termMeta['playlist_type'] = isset($_POST['playlist_type']) ? $_POST['playlist_type'] : '';
-        update_option($taxonomyName . '_' . $termID, $termMeta);
+        update_option($termID, $termMeta);
     }
 }
 add_action($taxonomyName . '_add_form_fields', 'add_tax_field_oncreate');
 add_action($taxonomyName . '_edit_form_fields', 'add_tax_field_onedit');
-add_action("create_$taxonomyName", "save_custom_tax_field");
-add_action("edited_$taxonomyName", "save_custom_tax_field");
+add_action("create_" . $taxonomyName, "save_custom_tax_field");
+add_action("edited_" . $taxonomyName, "save_custom_tax_field");
+
+
+function SammakQuran_menu()
+{
+    $locations = [
+        'footer' => "منوی پابرگ",
+    ];
+    register_nav_menus($locations);
+}
+add_action('init', 'SammakQuran_menu');
+
+function SammakQuran_get_menu_items($menu_name)
+{
+    $menu_list = "";
+    $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    if (($locations = get_nav_menu_locations()) && isset($locations[$menu_name])) {
+        $menu = wp_get_nav_menu_object($locations[$menu_name]);
+        $menu_items = wp_get_nav_menu_items($menu->term_id);
+        foreach ((array) $menu_items as $key => $menu_item) {
+            $title = $menu_item->title;
+            $url = $menu_item->url;
+            $thumbnail_src = wp_get_attachment_image_src($menu_item->thumbnail_id)[0] ?? get_template_directory_uri() . "/icons/all.svg";
+            if ($url ==  $actual_link) {
+                $class = " active ";
+            } else {
+                $class = "";
+            }
+            $menu_list .= '
+            <li class="bottom-nav-item ' . $class . ' ">
+                <a class="prevent-default" href="' . $url . '">
+                    <img class="bottom-nav-icon" src="' . $thumbnail_src . '">
+                    <span class="bottom-nav-label">' . $title . '</span>
+                </a>
+            </li>';
+        }
+    }
+    return $menu_list;
+}
+
+// Allow SVG
+add_filter('wp_check_filetype_and_ext', function ($data, $file, $filename, $mimes) {
+    global $wp_version;
+    if ($wp_version !== '4.7.1') {
+        return $data;
+    }
+    $filetype = wp_check_filetype($filename, $mimes);
+    return [
+        'ext'             => $filetype['ext'],
+        'type'            => $filetype['type'],
+        'proper_filename' => $data['proper_filename']
+    ];
+}, 10, 4);
+function cc_mime_types($mimes)
+{
+    $mimes['svg'] = 'image/svg+xml';
+    return $mimes;
+}
+add_filter('upload_mimes', 'cc_mime_types');
+function fix_svg()
+{
+    echo '';
+}
+add_action('admin_head', 'fix_svg');

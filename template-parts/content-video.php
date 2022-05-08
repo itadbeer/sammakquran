@@ -1,12 +1,20 @@
+<?php
+$playlist = wp_get_post_terms(get_the_ID(), 'playlists')[0]->name;
+?>
 <div class="post-container">
     <a class="prevent-default" href="<?php the_permalink(); ?>">
         <div class="post-face video-post">
             <div class="thumbnail-container">
-                <img class="thumbnail" src="<?php echo get_the_post_thumbnail_url() ? get_the_post_thumbnail_url() : get_template_directory_uri() . "/images/thumbnail.jpg"; ?>" alt="">
-                <img class="post-type-icon" src="<?php echo get_template_directory_uri(); ?>/icons/video.svg" alt="">
+                <?php
+                $thumbnail_id = get_post_thumbnail_id(get_the_ID());
+                $thumbnail_src = get_the_post_thumbnail_url() ? get_the_post_thumbnail_url() : get_template_directory_uri() . "/images/thumbnail.jpg";
+                $thumbnail_alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true) == "" ? get_the_title() : get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
+                ?>
+                <img class="thumbnail" src="<?php echo $thumbnail_src; ?>" alt="<?php echo $thumbnail_alt ?>">
+                <img class="post-type-icon" src="<?php echo get_template_directory_uri(); ?>/icons/video.svg" alt="ویدیو">
                 <div class="post-playlist">
-                    <img src="<?php echo get_template_directory_uri(); ?>/icons/playlist.svg" alt="">
-                    <span><?php echo $args['term_title']; ?></span>
+                    <img src="<?php echo get_template_directory_uri(); ?>/icons/playlist.svg" alt="لیست پخش">
+                    <span><?php echo $playlist; ?></span>
                 </div>
                 <div class="post-duration">10:37</div>
             </div>

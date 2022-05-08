@@ -1,7 +1,7 @@
 <?php
 get_header();
 ?>
-<main class="main flex column ai-center max-width">
+<main class="main flex column ai-center max-width fluid-width">
   <section class="splide header-carousel" aria-label="بنرهای هدر">
     <div style="position:relative;">
       <div class="splide__arrows flex jc-sb">

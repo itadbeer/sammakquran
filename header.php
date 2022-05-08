@@ -8,6 +8,7 @@
     <meta name="theme-color" content="#333333">
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/styles/style.css?v=">
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/styles/medium-device.css" media="(min-width: 672px)">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/styles/large-device.css" media="(min-width: 1024px)">
     <link rel="icon" type="image/png" href="<?php echo get_template_directory_uri(); ?>/images/favicon.png?v=">
     <link rel="apple-touch-icon" sizes="48x48" href="<?php echo get_template_directory_uri(); ?>/images/favicon.png?v=">
     <link rel="apple-touch-icon" sizes="72x72" href="<?php echo get_template_directory_uri(); ?>/images/favicon.png?v=">
@@ -31,6 +32,23 @@
                 ?>
             </a>
             <?php get_search_form(); ?>
+        </div>
+        <div id="shareMenu">
+            <button class="button-container button-56" onclick="copyUrl()">
+                <div class="button-face ghost-button">
+                    <img class="button-icon" src="icons/copy.svg" alt="">
+                </div>
+            </button>
+            <a class="button-container button-56" href="https://wa.me/?text={url}%0A{pageTitle}" target="_blank">
+                <div class="button-face ghost-button">
+                    <img class="button-icon" src="icons/whatsappt.svg" alt="">
+                </div>
+            </a>
+            <a class="button-container button-56" href="https://t.me/share/url?url={url}&text={pageTitle}" target="_blank">
+                <div class="button-face ghost-button">
+                    <img class="button-icon" src="icons/telegram.svg" alt="">
+                </div>
+            </a>
         </div>
     </header>
     <?php get_template_part('bottom-nav'); ?>

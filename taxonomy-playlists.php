@@ -30,8 +30,8 @@ switch ($playlist_type) {
 }
 ?>
 <main class="main max-width">
-  <header class="main-header">
-    <button class="button-container button-56">
+  <header class="main-header relative">
+    <button class="button-container button-56" onclick="history.back()">
       <div class="button-face green-button">
         <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="برگشت">
         <div class="button-glow"></div>
@@ -51,7 +51,7 @@ switch ($playlist_type) {
         </div>
       </a>
     </div>
-    <button class="button-container button-56">
+    <button class="button-container button-56" onclick="openShareMenu()">
       <div class="button-face yellow-button">
         <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/share.svg" alt="اشتراک گذاری">
         <div class="button-glow"></div>

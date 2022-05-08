@@ -8,8 +8,8 @@ $args = array(
 );
 $query = new WP_Query($args);
 ?>
-<main class="main flex column ai-center max-width">
-  <header class="main-header">
+<main class="main flex column ai-center max-width fluid-width">
+  <header class="main-header relative">
     <h1 class="main-title">آموزشی</h1>
     <button class="button-container button-48" onclick="openFilters()">
       <div class="button-face yellow-button text-button">
@@ -21,7 +21,6 @@ $query = new WP_Query($args);
   </header>
 
   <div id="filtersOverlay">
-    <div id="backgroundOverlay"></div>
     <form id="filters">
       <h2 class="filters-heading">فیلترها</h2>
       <h3 class="filters-category">دسته</h3>

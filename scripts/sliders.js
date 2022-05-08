@@ -42,6 +42,22 @@ for (let i = 0; i < postsSliders.length; i++) {
         fixedWidth: 'calc(50% - 12px)',
         gap: 24,
       },
+      1024: {
+        perPage: 3,
+        fixedWidth: 'calc(33.33% - 16px)',
+      },
+      1440: {
+        perPage: 4,
+        fixedWidth: 'calc(25% - 18px)',
+      },
+      1920: {
+        perPage: 5,
+        fixedWidth: 'calc(20% - 19.2px)',
+      },
+      2560: {
+        perPage: 6,
+        fixedWidth: 'calc(16.66% - 20px)',
+      },
     }
   }).mount();
 }

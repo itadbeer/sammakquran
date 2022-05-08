@@ -17,7 +17,7 @@ $args = [
 $query = new WP_Query($args);
 ?>
 <main class="main flex column ai-center max-width">
-    <header class="main-header">
+    <header class="main-header relative">
         <h1 class="main-title"><?php get_search_query(); ?></h1>
         <button class="button-container button-48" onclick="openFilters()">
             <div class="button-face yellow-button text-button">
@@ -106,14 +106,16 @@ $query = new WP_Query($args);
         wp_reset_postdata();
         ?>
     </section>
-    <div class="view-more-container flex jc-center">
-        <button class="button-container button-48">
-            <div class="button-face yellow-button text-button">
-                <div class="button-text">بیشتر</div>
-                <div class="button-glow"></div>
-                <div class="button-hover"></div>
-            </div>
-        </button>
-    </div>
+    <?php if ($query->max_num_pages > 1) { ?>
+        <div class="view-more-container flex jc-center">
+            <button class="button-container button-48">
+                <div class="button-face yellow-button text-button">
+                    <div class="button-text">بیشتر</div>
+                    <div class="button-glow"></div>
+                    <div class="button-hover"></div>
+                </div>
+            </button>
+        </div>
+    <?php } ?>
 </main>
 <?php get_footer(); ?>

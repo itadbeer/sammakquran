@@ -1,5 +1,5 @@
 <?php $playlist = wp_get_post_terms(get_the_ID(), 'playlists')[0]->name; ?>
-<div class="post-container">
+<div class="post-container revealable">
     <a class="prevent-default" href="<?php the_permalink(); ?>">
         <div class="post-face audio-post">
             <div class="flex ai-center">

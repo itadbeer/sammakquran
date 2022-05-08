@@ -1,38 +1,65 @@
 'use strict';
 
 let filtersOverlay = document.getElementById('filtersOverlay');
+let shareMenu = document.getElementById('shareMenu');
+let snackbar = document.getElementById('snackbar');
 let backgroundOverlay = document.getElementById('backgroundOverlay');
+let scrollEls = document.querySelectorAll('.revealable');
 
 function openFilters() {
   filtersOverlay.classList.add('show');
+  backgroundOverlay.classList.add('show');
+
   backgroundOverlay.addEventListener('click', closeFilters);
 }
 
 function closeFilters() {
   filtersOverlay.classList.remove('show');
+  backgroundOverlay.classList.remove('show');
+
   backgroundOverlay.removeEventListener('click', closeFilters);
 }
 
+function openShareMenu() {
+  shareMenu.classList.add('show');
+  backgroundOverlay.classList.add('show', 'invisible');
 
-function handle_navbar_active_item(){
-  let post_type_indicator = document.querySelector("body > main > header > div > a:nth-child(1) > div > img");
-  let is_audio =  post_type_indicator ? post_type_indicator.src.split("audio.svg").length > 1 : false;
-  let is_video =  post_type_indicator ? post_type_indicator.src.split("video.svg").length > 1 : false;
-  let is_article =  post_type_indicator ? post_type_indicator.src.split("blog.svg").length > 1 : false;
-  if(is_audio){
-    document.querySelector(".bottom-nav-icon[src*='audio.svg']").parentElement.parentElement.classList.add("active");
-  }
-  else if(is_video){
-    document.querySelector(".bottom-nav-icon[src*='video.svg']").parentElement.parentElement.classList.add("active");
-  }
-  else if(is_article){
-    document.querySelector(".bottom-nav-icon[src*='blog.svg']").parentElement.parentElement.classList.add("active");
-  }
-  else{
-    document.querySelector(".bottom-nav-icon[src*='all.svg']").parentElement.parentElement.classList.add("active");
+  backgroundOverlay.addEventListener('click', closeShareMenu);
+}
+
+function closeShareMenu() {
+  shareMenu.classList.remove('show');
+  backgroundOverlay.classList.remove('show', 'invisible');
+
+  backgroundOverlay.removeEventListener('click', closeShareMenu);
+}
+
+function copyUrl() {
+  let snackbarMsg = snackbar.querySelector('.snackbar-message');
+
+  navigator.clipboard.writeText(window.location.href);
+
+  snackbarMsg.innerText = 'لینک کپی شد.'
+  snackbar.classList.add('show');
+
+  setTimeout(hideSnackbar, 3000);
+
+  closeShareMenu();
+}
+
+function hideSnackbar() {
+  snackbar.classList.remove('show');
+}
+
+function handleScrollAnimation(el) {
+  if (el.getBoundingClientRect().top <= (window.innerHeight || document.documentElement.clientHeight) &&
+    el.getBoundingClientRect().bottom >= (window.clientTop || document.documentElement.clientTop)) {
+    el.style.transform = 'scale(1)';
+  } else {
+    el.style.transform = 'scale(0)';
   }
 }
-let navbar_active_item_handled = document.querySelectorAll(".bottom-nav-item.active").length>0;;
-if(navbar_active_item_handled === false){
-handle_navbar_active_item();
-}
+
+window.addEventListener('scroll', function () {
+  scrollEls.forEach(handleScrollAnimation);
+});

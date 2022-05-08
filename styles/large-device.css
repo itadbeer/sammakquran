@@ -1,0 +1,29 @@
+.fluid-width {
+  max-width: 100%;
+}
+
+.post-container {
+  width: 33.33%;
+}
+
+@media (min-width: 1440px) {
+  .post-container {
+    width: 25%;
+  }
+}
+
+@media (min-width: 1920px) {
+  .post-container {
+    width: 20%;
+  }
+}
+
+@media (min-width: 2560px) {
+  .fluid-width {
+    max-width: 2560px;
+  }
+
+  .post-container {
+    width: 16.66%;
+  }
+}

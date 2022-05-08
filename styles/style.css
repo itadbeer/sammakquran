@@ -25,6 +25,8 @@
   --color-primary-shade: #72D8EE;
   --color-accent-400: #F9E533;
   --color-accent-shade: #FFA439;
+
+  --easing-bouncing: cubic-bezier(1, 1.75, .95, .80);
 }
 
 *,
@@ -109,6 +111,10 @@ a:not([class]):active {
     transition-duration: .01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+.relative {
+  position: relative;
 }
 
 .flex {
@@ -442,7 +448,7 @@ input[type="radio"] {
 .custom-checkbox:hover .checkbox-hover,
 .custom-radio:hover .radio-hover {
   transform: scale(1);
-  transition: transform 200ms cubic-bezier(1, 1.75, .95, .80);
+  transition: transform 200ms var(--easing-bouncing);
 }
 
 input[type="checkbox"]:checked + .custom-checkbox .checkbox-button {
@@ -609,6 +615,8 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
 .posts-grid {
   display: flex;
   flex-wrap: wrap;
+
+  width: 100%;
 }
 
 .post-container {
@@ -924,6 +932,7 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
 
 .header-carousel {
   width: calc(100% + 48px);
+  max-width: 768px;
   margin: 0 -24px;
 }
 
@@ -1039,6 +1048,7 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
 
 .categories-carousel {
   width: calc(100% + 48px);
+  max-width: 768px;
   margin: 0 -24px;
 }
 
@@ -1118,6 +1128,8 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
 .about-section {
   flex-direction: column;
 
+  width: 100%;
+  max-width: 768px;
   padding: 16px;
   margin-top: 24px;
   border-radius: 16px;
@@ -1157,12 +1169,12 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
 .single-category {
   position: relative;
 
-  margin-left: 16px;
-
   color: var(--color-primary-100);
 }
 
 .single-time {
+  margin-right: 16px;
+
   white-space: nowrap;
 }
 
@@ -1187,6 +1199,7 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
   padding: 16px;
   margin-bottom: 24px;
   border-radius: 16px;
+
   background-color: var(--color-primary-100);
 }
 
@@ -1231,28 +1244,73 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
   padding: 0 8px 24px;
 }
 
+#audio {
+  visibility: hidden;
+}
+
 .play-button {
   margin: 0 24px;
 }
 
-.audio-timeline {
+
+.play-button .pause-icon,
+.play-button.paused .play-icon {
+  display: block;
+}
+
+.play-button .play-icon,
+.play-button.paused .pause-icon {
+  display: none;
+}
+
+.audio-timeline-container {
+  position: relative;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
   height: 16px;
   margin: 24px 0 8px;
   border: 2px solid var(--color-primary-500);
   border-radius: 8px;
 }
 
-.timeline-passed {
+.audio-timeline {
+  appearance: none;
+  position: absolute;
+
+  height: 48px;
+  width: 100%;
+  
+  opacity: 0;
+  cursor: pointer;
+}
+
+.audio-timeline::-webkit-slider-thumb {
+  appearance: none;
+
+  width: 0px;
   height: 100%;
-  width: 50%;
+}
+
+.audio-timeline::-moz-range-thumb {
+  width: 0px;
+  height: 100%;
+}
+
+.audio-timeline-face {
+  height: 100%;
+  width: 0;
   border-radius: 6px;
 
   background-color: var(--color-primary-400);
 
   box-shadow: inset 0 -4px 0 var(--color-primary-500);
+  pointer-events: none;
 }
 
-.audio-timeline + div {
+.audio-timeline-container + div {
   font-size: var(--fs-small);
   line-height: var(--lh-xshort);
 }
@@ -1289,9 +1347,11 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
 
   width: 100%;
 }
+
 .dc-column {
   width: 100%;
 }
+
 .main-video {
   position: sticky;
   top: 0;
@@ -1322,7 +1382,7 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 5;
+  z-index: 6;
 
   display: flex;
   justify-content: center;
@@ -1333,31 +1393,15 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
   height: 100vh;
 
   transition: visibility 100ms linear;
+  
+  pointer-events: none;
 }
 
 #filtersOverlay.show {
   visibility: visible;
 }
 
-#backgroundOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 5;
-
-  width: 100%;
-  height: 100%;
-
-  background-color: rgba(0, 0, 0, .24);
-
-  opacity: 0;
-  transition: opacity 100ms ease-in-out;
-}
-
 #filters {
-  position: relative;
-  z-index: 6;
-
   width: 80%;
   max-width: 512px;
   max-height: 72%;
@@ -1368,15 +1412,13 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
 
   transform: scale(0);
   transition: transform 100ms ease-in;
-}
-
-.show #backgroundOverlay {
-  opacity: 1;
+  
+  pointer-events: all;
 }
 
 .show #filters {
   transform: scale(1);
-  transition: transform 250ms cubic-bezier(1, 1.75, .95, .80);
+  transition: transform 250ms var(--easing-bouncing);
 }
 
 .filters-heading {
@@ -1419,4 +1461,118 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
 
 .filters-button-bar button[type="reset"] {
   margin-left: 8px;
+}
+
+#shareMenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 6;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  max-width: 100%;
+  padding: 16px 8px;
+  border-radius: 16px;
+
+  background-color: var(--color-primary-100);
+
+  transform: scale(0);
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, .24);
+  transition: transform 100ms ease-in;
+}
+
+#shareMenu.show {
+  display: flex;
+
+  transform: scale(1);
+  transition: transform 150ms var(--easing-bouncing);
+}
+
+#backgroundOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+
+  display: none;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, .24);
+
+  opacity: 0;
+  transition: opacity 100ms ease-in-out;
+}
+
+#backgroundOverlay.show {
+  display: block;
+
+  opacity: 1;
+}
+
+#backgroundOverlay.invisible {
+  opacity: 0;
+}
+
+#snackbar {
+  position: fixed;
+  bottom: 24px;
+  left: 0;
+  z-index: 6;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+
+  width: 100%;
+  padding: 0 24px;
+
+  transition: visibility 100ms linear;
+
+  pointer-events: none;
+}
+
+.snackbar-message {
+  width: 100%;
+  max-width: 512px;
+  padding: 16px;
+  border-radius: 16px;
+
+  background-color: var(--color-primary-100);
+
+  transform: scale(0);
+  box-shadow: 0 0 4px 4px rgba(0, 0, 0, .24);
+  transition: transform 100ms ease-in;
+
+  pointer-events: all;
+}
+
+#snackbar.show {
+  visibility: visible;
+}
+
+.show .snackbar-message {
+  transform: scale(1);
+  transition: transform 150ms var(--easing-bouncing);
+}
+
+.revealable {
+  transition: transform 250ms var(--easing-bouncing);
+  animation-name: reveal;
+  animation-duration: 250ms;
+  animation-timing-function: var(--easing-bouncing);
+}
+
+@keyframes reveal {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }

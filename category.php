@@ -1,16 +1,23 @@
 <?php
 get_header();
+$orderby_allowed_list = ['modified', 'date'];
+$orderby = "modified";
+if (isset($_GET['orderby']) && in_array($_GET['orderby'], $orderby_allowed_list)) {
+  $orderby = $_GET['orderby'];
+}
 global $query;
-$args = array(
-  'post_type' => 'post',
-  'posts_per_page' => -1,
-  'cat' => get_query_var('cat')
-);
+$cat_id = get_query_var('cat');
+$args = [
+  "cat"           => $cat_id,
+  "post_type"     => "post",
+  "post_status"   => "publish",
+  "orderby"       => $orderby
+];
 $query = new WP_Query($args);
 ?>
 <main class="main flex column ai-center max-width fluid-width">
   <header class="main-header relative">
-    <h1 class="main-title">آموزشی</h1>
+    <h1 class="main-title"><?php echo single_cat_title(); ?></h1>
     <button class="button-container button-48" onclick="openFilters()">
       <div class="button-face yellow-button text-button">
         <div class="button-text">فیلترها</div>

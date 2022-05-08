@@ -25,7 +25,7 @@ $found_posts_count = $query->found_posts;
             </div>
         </button>
         <div class="flex">
-            <a class="button-container button-56" href="">
+            <a class="button-container button-56">
                 <div class="button-face ghost-button">
                     <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/audio.svg" alt="صدا">
                 </div>

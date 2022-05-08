@@ -1122,6 +1122,7 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
 }
 
 .posts-carousel .post-container {
+  height: 100%;
   margin-bottom: 0;
 }
 

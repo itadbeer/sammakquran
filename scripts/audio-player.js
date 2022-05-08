@@ -24,10 +24,13 @@ function togglePlay() {
 }
 
 function formatTime(time) {
-  let minutes = parseInt(time / 60);
+  let hours = parseInt(time / 3600);
+  let minutes = parseInt((time - (hours * 3600)) / 60);
   let seconds = time % 60;
-  let formattedTime = `${minutes}:${
+  let formattedTime =
+    `${hours < 1 ? '' : `${hours}:`}${minutes < 10 ? `0${minutes}` : minutes}:${
     seconds < 10 ? `0${seconds.toFixed()}` : seconds.toFixed()}`
+
   return formattedTime;
 }
 
@@ -64,7 +67,3 @@ audio.addEventListener('play', function () {
 audio.addEventListener('pause', function () {
   get(ui.play).classList.add('paused')
 });
-
-// window.addEventListener('load', function () {
-//   get(ui.duration).innerText = formatTime(audio.duration);
-// })

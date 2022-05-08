@@ -1,4 +1,5 @@
-<?php get_header();
+<?php
+get_header();
 $args = array(
   'post_type' => 'post',
   'posts_per_page' => -1,
@@ -39,7 +40,7 @@ switch ($playlist_type) {
       </div>
     </button>
     <div class="flex">
-      <a class="button-container button-56" href="">
+      <a class="button-container button-56">
         <div class="button-face ghost-button">
           <img class="button-icon post-type-indicator" src="<?php echo $play_list_type_icon; ?>" alt="">
         </div>

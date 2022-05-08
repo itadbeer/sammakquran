@@ -64,8 +64,6 @@ picture {
 
   max-width: 100%;
   height: auto;
-
-  background-color: var(--color-primary-300);
 }
 
 input,
@@ -657,6 +655,8 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
   height: 100%;
   object-fit: cover;
 
+  background-color: var(--color-primary-300);
+
   transition: transform 150ms ease-in-out;
 }
 
@@ -1233,6 +1233,8 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
   margin-bottom: 24px;
   object-fit: cover;
   border-radius: 8px;
+
+  background-color: var(--color-primary-300);
 }
 
 .audio-content,

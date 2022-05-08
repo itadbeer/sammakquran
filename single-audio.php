@@ -126,8 +126,8 @@ $found_posts_count = $query->found_posts;
                         <div class="audio-timeline-face" id="timelineFace"></div>
                     </div>
                     <div class="flex jc-sb">
-                        <span id="audioDuration">0:00</span>
-                        <span id="audioCurrentTime">0:00</span>
+                        <span id="audioDuration">00:00</span>
+                        <span id="audioCurrentTime">00:00</span>
                     </div>
                 </div>
                 <h2>توضیحات</h2>

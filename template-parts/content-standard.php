@@ -1,4 +1,4 @@
-<div class="post-container">
+<div class="post-container revealable">
     <a class="prevent-default" href="<?php the_permalink(); ?>">
         <div class="post-face blog-post">
             <div class="flex ai-center">

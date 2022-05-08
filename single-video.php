@@ -14,6 +14,14 @@ $args = array(
 );
 $query = new WP_Query($args);
 $found_posts_count = $query->found_posts;
+$content = get_the_content();
+$video_src = [];
+preg_match_all('/(src)=("[^"]*")/i', $content, $video_src);
+if (count($video_src[2]) > 0) {
+  $video_src = (str_replace('"', '', $video_src[2][0]));
+} else {
+  $video_src = null;
+}
 ?>
 <main class="main max-width">
   <header class="main-header relative">
@@ -63,7 +71,7 @@ $found_posts_count = $query->found_posts;
     </div>
   </header>
 
-  <video class="main-video" src="" controls></video>
+  <video class="main-video" src="<?php echo $video_src; ?>" controls></video>
 
   <section class="dbl-column flex ai-start">
     <article class="flex column ai-start single single-video dc-column">
@@ -94,7 +102,7 @@ $found_posts_count = $query->found_posts;
       </a>
       <div class="video-content">
         <h2>توضیحات</h2>
-        <?php echo the_content(); ?>
+        <?php echo strip_tags_content($content, ["<a>", "<b>", "<i>", "<u>", "<strong>", "<em>", "<p>", "<br>"]); ?>
       </div>
     </article>
     <section class="dc-column playlist-posts">

@@ -121,7 +121,7 @@ $query = new WP_Query($args);
         <?php } ?>
     </main>
 <?php } else {
-    get_template_part('template-parts/empty-state', args: ['title' => 'درحال حاضر ویدیویی وجود ندارد']);
+    get_template_part('template-parts/empty-state', args: ['title' => 'درحال حاضر محتوایی وجود ندارد']);
 }
 ?>
 <?php get_footer(); ?>

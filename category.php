@@ -25,7 +25,7 @@ if ($posts->have_posts()) {
         </div>
       </button>
     </header>
-    <?php get_template_part("template-parts/filters"); ?>
+    <?php get_template_part("template-parts/filters", args: ['hide_category_filter_options' => true]); ?>
     <section class="posts-grid">
       <?php
 

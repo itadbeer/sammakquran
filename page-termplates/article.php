@@ -40,7 +40,7 @@ if ($query->have_posts()) { ?>
                 </div>
             </button>
         </header>
-        <?php get_template_part("template-parts/filters"); ?>
+        <?php get_template_part("template-parts/filters", args: ['hide_category_filter_options' => false]); ?>
         <section class="posts-grid">
             <?php
             while ($query->have_posts()) {

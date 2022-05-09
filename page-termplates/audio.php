@@ -4,10 +4,12 @@
 get_header();
 $order = $_GET['order'] ?? 'DESC';
 $pageNumber = $_GET['pageNumber'] ?? 1;
+$categories = $_GET['category'] ?? [];
 global $query;
 $query = new WP_Query(array(
     'order' => $order,
     'posts_per_page' => get_option('posts_per_page') * $pageNumber,
+    'category__in' => $categories,
     'tax_query' => array(
         array(
             'taxonomy' => 'post_format',

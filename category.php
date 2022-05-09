@@ -1,19 +1,18 @@
 <?php
 get_header();
+$pageNumber = $_GET['pageNumber'] ?? 1;
 $orderby_allowed_list = ['modified', 'date'];
 $orderby = "modified";
 if (isset($_GET['orderby']) && in_array($_GET['orderby'], $orderby_allowed_list)) {
   $orderby = $_GET['orderby'];
 }
-global $query;
 $cat_id = get_query_var('cat');
 $args = [
+  'posts_per_page' => intval(get_option('posts_per_page')) * $pageNumber,
   "cat"           => $cat_id,
-  "post_type"     => "post",
-  "post_status"   => "publish",
   "orderby"       => $orderby
 ];
-$query = new WP_Query($args);
+$posts = new WP_Query($args);
 ?>
 <main class="main flex column ai-center max-width fluid-width">
   <header class="main-header relative">
@@ -95,16 +94,16 @@ $query = new WP_Query($args);
 
   <section class="posts-grid">
     <?php
-    if ($query->have_posts()) {
-      while ($query->have_posts()) {
-        $query->the_post();
+    if ($posts->have_posts()) {
+      while ($posts->have_posts()) {
+        $posts->the_post();
         get_template_part('template-parts/content', get_post_format());
       }
+      wp_reset_postdata();
     }
-    wp_reset_postdata();
     ?>
   </section>
-  <?php if ($query->max_num_pages > 1) { ?>
+  <?php if ($posts->max_num_pages > 1) { ?>
     <div class="view-more-container flex jc-center">
       <button class="button-container button-48">
         <div class="button-face yellow-button text-button">
@@ -116,4 +115,5 @@ $query = new WP_Query($args);
     </div>
   <?php } ?>
 </main>
+<script src="<?php echo get_template_directory_uri(); ?>/scripts/load_more_post.js"></script>
 <?php echo get_footer(); ?>

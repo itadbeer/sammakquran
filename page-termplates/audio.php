@@ -2,17 +2,17 @@
     Template Name: صفحه صدا ها
 */
 get_header();
+$order = $_GET['order'] ?? 'DESC';
 $pageNumber = $_GET['pageNumber'] ?? 1;
 global $query;
 $query = new WP_Query(array(
+    'order' => $order,
     'posts_per_page' => get_option('posts_per_page') * $pageNumber,
     'tax_query' => array(
         array(
             'taxonomy' => 'post_format',
             'field' => 'slug',
             'terms' => ['post-format-audio'],
-            'orderby' => "date",
-            'order' => 'DESC'
         )
     )
 ));
@@ -30,73 +30,7 @@ if ($query->have_posts()) {
                 </div>
             </button>
         </header>
-
-        <div id="filtersOverlay">
-            <form id="filters">
-                <h2 class="filters-heading">فیلترها</h2>
-                <h3 class="filters-category">دسته</h3>
-                <input type="checkbox" name="test" id="checkboxTest">
-                <label class="custom-checkbox" for="checkboxTest">
-                    <div class="checkbox-button">
-                        <div class="checkbox-icon"></div>
-                        <div class="checkbox-hover"></div>
-                    </div>
-                    <div class="checkbox-text">چکباکس تستی</div>
-                </label>
-                <input type="checkbox" name="test" id="checkboxTest2">
-                <label class="custom-checkbox" for="checkboxTest2">
-                    <div class="checkbox-button">
-                        <div class="checkbox-icon"></div>
-                        <div class="checkbox-hover"></div>
-                    </div>
-                    <div class="checkbox-text">چکباکس تستی</div>
-                </label>
-                <input type="checkbox" name="test" id="checkboxTest3">
-                <label class="custom-checkbox" for="checkboxTest3">
-                    <div class="checkbox-button">
-                        <div class="checkbox-icon"></div>
-                        <div class="checkbox-hover"></div>
-                    </div>
-                    <div class="checkbox-text">چکباکس تستی</div>
-                </label>
-
-                <h3 class="filters-category">دسته</h3>
-                <input type="radio" name="test2" id="radioTest1">
-                <label class="custom-radio" for="radioTest1">
-                    <div class="radio-button">
-                        <div class="radio-icon"></div>
-                        <div class="radio-hover"></div>
-                    </div>
-                    <div class="radio-text">رادیو تستی</div>
-                </label>
-                <input type="radio" name="test2" id="radioTest2">
-                <label class="custom-radio" for="radioTest2">
-                    <div class="radio-button">
-                        <div class="radio-icon"></div>
-                        <div class="radio-hover"></div>
-                    </div>
-                    <div class="radio-text">رادیو تستی</div>
-                </label>
-
-                <div class="filters-button-bar">
-                    <button class="button-container button-48" type="reset">
-                        <div class="button-face white-button text-button">
-                            <div class="button-text">پاک‌کردن</div>
-                            <div class="button-glow"></div>
-                            <div class="button-hover"></div>
-                        </div>
-                    </button>
-                    <button class="button-container button-48" type="submit">
-                        <div class="button-face green-button text-button">
-                            <div class="button-text">اعمال</div>
-                            <div class="button-glow"></div>
-                            <div class="button-hover"></div>
-                        </div>
-                    </button>
-                </div>
-            </form>
-        </div>
-
+        <?php get_template_part("template-parts/filters"); ?>
         <section class="posts-grid">
             <?php
             while ($query->have_posts()) {

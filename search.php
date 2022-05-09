@@ -21,7 +21,7 @@ $query = new WP_Query($args);
 <?php if ($query->have_posts()) { ?>
     <main class="main flex column ai-center max-width fluid-width">
         <header class="main-header relative">
-            <h1 class="main-title"><?php get_search_query(); ?></h1>
+            <h1 class="main-title"><?php echo get_search_query(); ?></h1>
             <button class="button-container button-48" onclick="openFilters()">
                 <div class="button-face yellow-button text-button">
                     <div class="button-text">فیلترها</div>

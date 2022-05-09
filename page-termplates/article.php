@@ -4,7 +4,7 @@
 get_header();
 $pageNumber = $_GET['pageNumber'] ?? 1;
 $query = new WP_Query(array(
-    'posts_per_page' => intval(get_option('posts_per_page')) * $pageNumber,
+    'posts_per_page' => get_option('posts_per_page') * $pageNumber,
     'tax_query' => array(
         array(
             'taxonomy' => 'post_format',

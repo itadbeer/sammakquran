@@ -8,7 +8,7 @@ if (isset($_GET['orderby']) && in_array($_GET['orderby'], $orderby_allowed_list)
 }
 $cat_id = get_query_var('cat');
 $args = [
-  'posts_per_page' => intval(get_option('posts_per_page')) * $pageNumber,
+  'posts_per_page' => (get_option('posts_per_page') * $pageNumber) + 1,
   "cat"           => $cat_id,
   "orderby"       => $orderby
 ];
@@ -103,7 +103,10 @@ $posts = new WP_Query($args);
     }
     ?>
   </section>
-  <?php if ($posts->max_num_pages > 1) { ?>
+  <?php
+  $category_posts_count = get_category($cat_id)->category_count;
+  $displayed_posts_count = (get_option('posts_per_page') * $pageNumber) + 1;
+  if ($displayed_posts_count < $category_posts_count) { ?>
     <div class="view-more-container flex jc-center">
       <button class="button-container button-48">
         <div class="button-face yellow-button text-button">

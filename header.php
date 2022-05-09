@@ -34,4 +34,6 @@
             <?php get_search_form(); ?>
         </div>
     </header>
-    <?php get_template_part('bottom-nav'); ?>
+    <?php if (!isset($args['hide_bottom_navbar'])) {
+        get_template_part('bottom-nav');
+    } ?>

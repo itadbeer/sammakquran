@@ -51,15 +51,15 @@ function hideSnackbar() {
   snackbar.classList.remove('show');
 }
 
-function handleScrollAnimation(el) {
-  if (el.getBoundingClientRect().top <= (window.innerHeight || document.documentElement.clientHeight) &&
-    el.getBoundingClientRect().bottom >= (window.clientTop || document.documentElement.clientTop)) {
-    el.style.transform = 'scale(1)';
-  } else {
-    el.style.transform = 'scale(0)';
-  }
-}
+// function handleScrollAnimation(el) {
+//   if (el.getBoundingClientRect().top <= (window.innerHeight || document.documentElement.clientHeight) &&
+//     el.getBoundingClientRect().bottom >= (window.clientTop || document.documentElement.clientTop)) {
+//     el.style.transform = 'scale(1)';
+//   } else {
+//     el.style.transform = 'scale(0)';
+//   }
+// }
 
-window.addEventListener('scroll', function () {
-  scrollEls.forEach(handleScrollAnimation);
-});
+// window.addEventListener('scroll', function () {
+//   scrollEls.forEach(handleScrollAnimation);
+// });

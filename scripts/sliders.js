@@ -3,7 +3,7 @@
 let postsSliders = document.getElementsByClassName('posts-carousel');
 
 new Splide('.header-carousel', {
-  type: 'loop',
+//   type: 'loop',
   direction: 'rtl',
   lazyLoad: 'nearby',
   perPage: 1,

@@ -6,13 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php wp_head(); ?>
     <meta name="theme-color" content="#333333">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/styles/style.css?v=">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/styles/medium-device.css" media="(min-width: 672px)">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/styles/large-device.css" media="(min-width: 1024px)">
-    <link rel="icon" type="image/png" href="<?php echo get_template_directory_uri(); ?>/images/favicon.png?v=">
-    <link rel="apple-touch-icon" sizes="48x48" href="<?php echo get_template_directory_uri(); ?>/images/favicon.png?v=">
-    <link rel="apple-touch-icon" sizes="72x72" href="<?php echo get_template_directory_uri(); ?>/images/favicon.png?v=">
-    <link rel="apple-touch-icon" sizes="96x96" href="<?php echo get_template_directory_uri(); ?>/images/favicon.png?v=">
+    <?php $version = wp_get_theme()->get('Version'); ?>
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/styles/style.css?v=<?php echo $version; ?>">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/styles/medium-device.css?v=<?php echo $version; ?>" media="(min-width: 672px)">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/styles/large-device.css?v=<?php echo $version; ?>" media="(min-width: 1024px)">
+    <link rel="icon" type="image/png" href="<?php echo get_template_directory_uri(); ?>/images/favicon.png?v=<?php echo $version; ?>">
 </head>
 
 <body <?php body_class(); ?>>

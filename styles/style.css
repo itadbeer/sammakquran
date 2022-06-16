@@ -985,6 +985,10 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
     transform 100ms ease-out;
 }
 
+.header-carousel .splide__arrow:disabled {
+  visibility: hidden;
+}
+
 .splide__arrow--next .button-icon {
   transform: rotateY(180deg);
 }

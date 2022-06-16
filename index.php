@@ -34,12 +34,13 @@ get_header();
           if ($slider->have_posts()) {
             while ($slider->have_posts()) {
               $slider->the_post();
-              $thumbnail_id = get_post_thumbnail_id($slider->get_the_ID());
-              $thumbnail_alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true) == "" ? get_the_title($slider) : get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
-              $thumbnail_src = wp_get_attachment_image_src($thumbnail_id)[0] ?? get_template_directory_uri() . "/icons/all.svg";
+              $slider_id = get_post_thumbnail_id($slider->get_the_ID());
+              $slider_alt = get_post_meta($slider_id, '_wp_attachment_image_alt', true) == "" ? get_the_title($slider) : get_post_meta($slider_id, '_wp_attachment_image_alt', true);
+              $slider_src = wp_get_attachment_image_src($slider_id)[0] ?? get_template_directory_uri() . "/icons/all.svg";
+              $slider_link = get_post_custom_values('slider_link')[0] ?? "#";
               echo '<li class="splide__slide">';
-              echo '<a class="header-banner" href="">';
-              echo '<img data-splide-lazy="' . $thumbnail_src . '" alt="' . $thumbnail_alt . '">';
+              echo '<a class="header-banner" href="' . $slider_link . '">';
+              echo '<img data-splide-lazy="' . $slider_src . '" alt="' . $slider_alt . '">';
               echo '</a>';
               echo '</li>';
             }

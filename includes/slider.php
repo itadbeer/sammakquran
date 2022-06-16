@@ -4,7 +4,7 @@ $args = array(
     'label'     => __('اسلایدر ها', 'textdomain'),
     'menu_icon' => 'dashicons-slides',
     'menu_position' => 5,
-    'supports'      => array('title', 'thumbnail'),
+    'supports'      => array('title', 'thumbnail', 'custom-fields'),
     'labels' => [
         'name'                  => _x('اسلایدر ها', 'Post type general name', 'textdomain'),
         'singular_name'         => _x('اسلایدر', 'Post type singular name', 'textdomain'),
@@ -30,3 +30,15 @@ $args = array(
     ],
 );
 register_post_type('sliders', $args);
+
+function sliders_custom_field($post_id)
+{
+    $post_type = get_post_type($post_id);
+    $meta_value = '#';
+    $meta_name = 'slider_link';
+    if ($post_type === 'sliders') {
+        add_post_meta($post_id, $meta_name, $meta_value, true);
+    }
+    return $post_type;
+}
+add_action('wp_insert_post', 'sliders_custom_field');

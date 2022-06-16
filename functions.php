@@ -168,13 +168,18 @@ function strip_tags_content(string $content, $tags = [])
     return strip_tags($content, $tags);
 }
 
-function get_media_duration(string $url)
+function get_media_duration($cached_durations, string $url)
 {
-    $metadata = wp_read_audio_metadata(ContentUrlToLocalPath($url));
-    return $metadata == false ? "0:00" : $metadata['length_formatted'];
+    if (array_key_exists($url, $cached_durations)) {
+        return $cached_durations[$url]['duration'];
+    } else {
+        $metadata = wp_read_audio_metadata(ContentUrlToLocalPath($url));
+        return $metadata == false ? "0:00" : $metadata['length_formatted'];
+    }
+    return "0:00";
 }
 
-function ContentUrlToLocalPath($url)
+function ContentUrlToLocalPath(string $url)
 {
     preg_match('/.*(\/wp\-content\/uploads\/\d+\/\d+\/.*)/', $url, $mat);
     if (count($mat) > 0) return ABSPATH . $mat[1];

@@ -2,6 +2,8 @@
     Template Name: صفحه ویدیو ها
 */
 get_header();
+$response = file_get_contents("https://dl.sammakqoran.com/metadata.json");
+$cached_durations = json_decode($response, true);
 $order = $_GET['order'] ?? 'DESC';
 $pageNumber = $_GET['pageNumber'] ?? 1;
 $categories = $_GET['category'] ?? [];
@@ -36,7 +38,7 @@ if ($query->have_posts()) {
             <?php
             while ($query->have_posts()) {
                 $query->the_post();
-                get_template_part('template-parts/content', get_post_format());
+                get_template_part('template-parts/content', get_post_format(), args: ["cached_durations" => $cached_durations]);
             }
 
             wp_reset_postdata();

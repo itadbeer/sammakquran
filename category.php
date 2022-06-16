@@ -1,5 +1,7 @@
 <?php
 get_header();
+$response = file_get_contents("https://dl.sammakqoran.com/metadata.json");
+$cached_durations = json_decode($response, true);
 $order = $_GET['order'] ?? 'DESC';
 $pageNumber = $_GET['pageNumber'] ?? 1;
 if (isset($_GET['orderby']) && in_array($_GET['orderby'], $orderby_allowed_list)) {
@@ -31,7 +33,7 @@ if ($posts->have_posts()) {
 
       while ($posts->have_posts()) {
         $posts->the_post();
-        get_template_part('template-parts/content', get_post_format());
+        get_template_part('template-parts/content', get_post_format(), args: ['cached_durations' => $cached_durations]);
       }
       wp_reset_postdata();
 

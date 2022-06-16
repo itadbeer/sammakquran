@@ -1,5 +1,7 @@
 <?php
 get_header();
+$response = file_get_contents("https://dl.sammakqoran.com/metadata.json");
+$cached_durations = json_decode($response, true);
 ?>
 <main class="main flex column ai-center max-width fluid-width">
   <section class="splide header-carousel" aria-label="بنرهای هدر">
@@ -135,7 +137,7 @@ get_header();
           while ($query->have_posts()) {
             $query->the_post();
             echo '<li class="splide__slide">';
-            get_template_part('template-parts/content', get_post_format());
+            get_template_part('template-parts/content', get_post_format(), args: ['cached_durations' => $cached_durations]);
             echo '</li>';
           }
           wp_reset_postdata();
@@ -188,7 +190,7 @@ get_header();
           while ($query->have_posts()) {
             $query->the_post();
             echo '<li class="splide__slide">';
-            get_template_part('template-parts/content', get_post_format());
+            get_template_part('template-parts/content', get_post_format(), args: ['cached_durations' => $cached_durations]);
             echo '</li>';
           }
           wp_reset_postdata();

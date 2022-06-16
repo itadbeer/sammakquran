@@ -22,6 +22,7 @@ if (count($video_src[2]) > 0) {
 } else {
   $video_src = null;
 }
+$video_cover_src = get_the_post_thumbnail_url(get_the_ID(), 'full');
 ?>
 <main class="main max-width">
   <header class="main-header relative">
@@ -74,7 +75,7 @@ if (count($video_src[2]) > 0) {
     </div>
   </header>
 
-  <video class="main-video" src="<?php echo $video_src; ?>" controls></video>
+  <video class="main-video" src="<?php echo $video_src; ?>" controls poster="<?php echo $video_cover_src; ?>"></video>
 
   <section class="dbl-column flex ai-start">
     <article class="flex column ai-start single single-video dc-column">

@@ -36,7 +36,11 @@ $video_cover_src = get_the_post_thumbnail_url(get_the_ID(), 'full');
       </div>
     </button>
     <div class="flex">
-      <a class="button-container button-56">
+      <?php
+      $video_page = get_page_by_path("video", OBJECT, array('page'));
+      $video_page_permalink = get_permalink($video_page?->ID);
+      ?>
+      <a class="button-container button-56" href="<?php echo $video_page_permalink; ?>">
         <div class="button-face ghost-button">
           <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/video.svg" alt="ویدیو">
         </div>

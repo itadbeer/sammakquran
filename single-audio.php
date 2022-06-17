@@ -35,7 +35,11 @@ if (count($audio_src[2]) > 0) {
             </div>
         </button>
         <div class="flex">
-            <a class="button-container button-56">
+            <?php
+            $audio_page = get_page_by_path("audio", OBJECT, array('page'));
+            $audio_page_permalink = get_permalink($audio_page?->ID);
+            ?>
+            <a class="button-container button-56" href="<?php echo $audio_page_permalink; ?>">
                 <div class="button-face ghost-button">
                     <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/audio.svg" alt="صدا">
                 </div>

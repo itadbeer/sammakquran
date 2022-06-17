@@ -17,7 +17,11 @@ $found_posts_count = $query->found_posts;
       </div>
     </button>
     <div class="flex">
-      <a class="button-container button-56" href="#">
+      <?php
+      $standard_page = get_page_by_path("standard", OBJECT, array('page'));
+      $standard_page_permalink = get_permalink($standard_page?->ID);
+      ?>
+      <a class="button-container button-56" href="<?php echo $standard_page_permalink; ?>">
         <div class="button-face ghost-button">
           <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/blog.svg" alt="مقاله">
         </div>

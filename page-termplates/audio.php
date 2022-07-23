@@ -47,7 +47,7 @@ if ($query->have_posts()) {
         </section>
         <?php if ($query->max_num_pages > 1) { ?>
             <form class="view-more-container flex jc-center">
-                <button class="button-container button-48" name="pageNumber">
+                <button class="button-container button-48" name="pageNumber" value="<?php echo $pageNumber; ?>">
                     <div class="button-face yellow-button text-button">
                         <div class="button-text">بیشتر</div>
                         <div class="button-glow"></div>

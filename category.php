@@ -43,15 +43,15 @@ if ($posts->have_posts()) {
     $category_posts_count = get_category($cat_id)->category_count;
     $displayed_posts_count = (get_option('posts_per_page') * $pageNumber) + 1;
     if ($displayed_posts_count < $category_posts_count) { ?>
-      <div class="view-more-container flex jc-center">
-        <button class="button-container button-48">
+      <form class="view-more-container flex jc-center">
+        <button class="button-container button-48" name="pageNumber">
           <div class="button-face yellow-button text-button">
             <div class="button-text">بیشتر</div>
             <div class="button-glow"></div>
             <div class="button-hover"></div>
           </div>
         </button>
-      </div>
+      </form>
   <?php }
   } else {
     get_template_part('template-parts/empty-state', args: ['title' => 'درحال حاضر در این دسته محتوایی وجود ندارد']);

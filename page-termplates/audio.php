@@ -46,15 +46,15 @@ if ($query->have_posts()) {
             ?>
         </section>
         <?php if ($query->max_num_pages > 1) { ?>
-            <div class="view-more-container flex jc-center">
-                <button class="button-container button-48">
+            <form class="view-more-container flex jc-center">
+                <button class="button-container button-48" name="pageNumber">
                     <div class="button-face yellow-button text-button">
                         <div class="button-text">بیشتر</div>
                         <div class="button-glow"></div>
                         <div class="button-hover"></div>
                     </div>
                 </button>
-            </div>
+            </form>
     <?php }
     } else {
         get_template_part('template-parts/empty-state', args: ['title' => 'درحال حاضر صدایی وجود ندارد']);

@@ -44,7 +44,7 @@ if ($posts->have_posts()) {
     $displayed_posts_count = (get_option('posts_per_page') * $pageNumber) + 1;
     if ($displayed_posts_count < $category_posts_count) { ?>
       <form class="view-more-container flex jc-center">
-        <button class="button-container button-48" name="pageNumber" value="<?php echo $pageNumber; ?>">
+        <button class="button-container button-48" name="pageNumber" value="<?php echo ++$pageNumber; ?>">
           <div class="button-face yellow-button text-button">
             <div class="button-text">بیشتر</div>
             <div class="button-glow"></div>

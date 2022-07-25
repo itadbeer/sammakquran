@@ -185,3 +185,14 @@ function ContentUrlToLocalPath(string $url)
     if (count($mat) > 0) return ABSPATH . $mat[1];
     return '';
 }
+
+// update media meatadata using a call to the dl.sammakqoran.com
+add_action('publish_post', 'call_the_endpoint', 10, 2);
+function call_the_endpoint($post_id, $post)
+{
+    $post_type = $post->post_type;
+    if ($post_type == 'video') {
+        $url = "https://dl.sammakqoran.com/";
+        wp_remote_request($url, ['method' => 'GET']);
+    }
+}

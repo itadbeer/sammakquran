@@ -63,3 +63,21 @@ function hideSnackbar() {
 // window.addEventListener('scroll', function () {
 //   scrollEls.forEach(handleScrollAnimation);
 // });
+
+if (document.querySelector('.posts-grid .post-container#p1') && sessionStorage.postCardsCount) {
+  let postCardsCount = Number(sessionStorage.postCardsCount);
+  let scrollToPost = document.getElementById(`p${postCardsCount + 1}`);
+
+  window.addEventListener('load', function () {
+    document.querySelector('html').style.scrollBehavior = 'auto';
+    window.scrollTo(0, scrollToPost.offsetTop - 16);
+    document.querySelector('html').style.scrollBehavior = null;
+    sessionStorage.removeItem('postCardsCount');
+  });
+}
+
+function getPostCardsCount() {
+  let postCards = document.querySelectorAll('.posts-grid .post-container');
+  
+  sessionStorage.postCardsCount = postCards.length;
+}

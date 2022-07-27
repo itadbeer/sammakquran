@@ -19,7 +19,7 @@ if (count($audio_src[2]) > 0) {
                     $thumbnail_src = get_the_post_thumbnail_url() ? get_the_post_thumbnail_url() : get_template_directory_uri() . "/images/placeholder.svg";
                     $thumbnail_alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true) == "" ? get_the_title() : get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
                     ?>
-                    <img class="thumbnail" src="<?php echo $thumbnail_src; ?>" alt="<?php echo $thumbnail_alt; ?>">
+                    <img class="thumbnail" src="<?php echo $thumbnail_src; ?>" alt="<?php echo $thumbnail_alt; ?>" loading="lazy">
                     <img class="post-type-icon" src="<?php echo get_template_directory_uri(); ?>/icons/audio.svg" alt="صدا">
                 </div>
                 <div class="flex column">

@@ -45,9 +45,10 @@ if ($query->have_posts()) { ?>
         <?php get_template_part("template-parts/filters", args: ['hide_category_filter_options' => false]); ?>
         <section class="posts-grid">
             <?php
+            $counter = 0;
             while ($query->have_posts()) {
                 $query->the_post();
-                get_template_part('template-parts/content', get_post_format() ? get_post_format() : "standard");
+                get_template_part('template-parts/content', get_post_format() ? get_post_format() : "standard", args: ['counter' => ++$counter]);
             }
             wp_reset_postdata();
 
@@ -55,7 +56,7 @@ if ($query->have_posts()) { ?>
         </section>
         <?php if ($query->max_num_pages > 1) { ?>
             <form class="view-more-container flex jc-center">
-                <button class="button-container button-48" name="pageNumber" value="<?php echo ++$pageNumber; ?>">
+                <button class="button-container button-48" name="pageNumber" value="<?php echo ++$pageNumber; ?>" onclick="getPostCardsCount()">
                     <div class="button-face yellow-button text-button">
                         <div class="button-text">بیشتر</div>
                         <div class="button-glow"></div>

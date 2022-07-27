@@ -9,7 +9,7 @@ if (count($audio_src[2]) > 0) {
     $audio_src = "";
 }
 ?>
-<div class="post-container revealable" id="p<?php echo $args['counter']; ?>">
+<div class="post-container revealable" id="p<?php echo $args['counter'] ?? ''; ?>">
     <a class="prevent-default" href="<?php the_permalink(); ?>">
         <div class="post-face audio-post">
             <div class="flex ai-center">

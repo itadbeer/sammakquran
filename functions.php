@@ -112,7 +112,7 @@ function SammakQuran_get_menu_items($menu_name)
 {
     $menu_list = "";
     $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    $actual_link = explode("&pageNumber=", $actual_link)[0];
+    $actual_link = strtok($actual_link, "?")[0];
     if (($locations = get_nav_menu_locations()) && isset($locations[$menu_name])) {
         $menu = wp_get_nav_menu_object($locations[$menu_name]);
         $menu_items = wp_get_nav_menu_items($menu->term_id);

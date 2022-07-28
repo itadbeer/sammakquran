@@ -300,5 +300,5 @@ $cached_durations = json_decode($response, true);
   <a class="prevent-default" href="https://edrisranjbar.ir" target="_blank">ادریس</a>
 </footer>
 <script src="<?php echo get_template_directory_uri(); ?>/scripts/splide.min.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/scripts/sliders.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/scripts/sliders.js?v=<?php echo get_theme_version(); ?>"></script>
 <?php get_footer(); ?>

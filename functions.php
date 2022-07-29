@@ -202,27 +202,3 @@ function get_theme_version()
 {
     return wp_get_theme()->get('Version');
 }
-
-function get_playlists_by_category($cat_id)
-{
-    $playlists = [];
-    $args = [
-        'post_type' => 'playlist',
-        'posts_per_page' => -1,
-        'tax_query' => [
-            [
-                'taxonomy' => 'playlist_category',
-                'field' => 'term_id',
-                'terms' => $cat_id,
-            ],
-        ],
-    ];
-    $posts = new WP_Query($args);
-    if ($posts->have_posts()) {
-        while ($posts->have_posts()) {
-            $posts->the_post();
-            $playlists[] = get_the_ID();
-        }
-    }
-    return $playlists;
-}

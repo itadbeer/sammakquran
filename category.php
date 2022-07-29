@@ -15,6 +15,17 @@ $args = [
 ];
 $posts = new WP_Query($args);
 if ($posts->have_posts()) {
+
+  // get all playlists of posts in this category
+  $playlists = [];
+  while ($posts->have_posts()) {
+    $posts->the_post();
+    $playlist = wp_get_post_terms(get_the_ID(), 'playlists')[0] ?? [];
+    if (!in_array($playlist, $playlists) && $playlist !== []) {
+      array_push($playlists, $playlist);
+    }
+  }
+
 ?>
   <main class="main flex column ai-center max-width fluid-width">
 
@@ -39,20 +50,19 @@ if ($posts->have_posts()) {
         <div class="splide__track">
           <ul class="splide__list">
             <?php
-            // get all category playlists
-            $category_playlists = get_playlists_by_category($cat_id);
-            foreach ($category_playlists as $playlist) {
+            foreach ($playlists as $key => $playlist) {
             ?>
               <li class="splide__slide">
-                <a class="button-container button-48" href="<?php echo $playlist->get_permalink(); ?>">
+                <a class="button-container button-48" href="<?php echo $playlist->slug ?? ''; ?>">
                   <div class="button-face white-button text-button">
                     <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/playlist.svg" alt="">
-                    <div class="button-text"><?php echo $playlist->get_the_title(); ?></div>
+                    <div class="button-text"><?php echo $playlist->name ?? ''; ?></div>
                     <div class="button-hover"></div>
                   </div>
                 </a>
               </li>
-            <?php }
+            <?php
+            }
             ?>
           </ul>
         </div>

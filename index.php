@@ -5,8 +5,8 @@ $cached_durations = json_decode($response, true);
 $video_page = get_page_by_path("video", OBJECT, array('page'));
 $audio_page = get_page_by_path("audio", OBJECT, array('page'));
 $blog_page = get_page_by_path("standard", OBJECT, array('page'));
-$audio_page_link = get_permalink($video_page?->ID);
-$video_page_link = get_permalink($audio_page?->ID);
+$video_page_link = get_permalink($video_page?->ID);
+$audio_page_link = get_permalink($audio_page?->ID);
 $blog_page_link = get_permalink($blog_page?->ID);
 ?>
 <main class="main flex column ai-center max-width fluid-width">

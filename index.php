@@ -2,6 +2,12 @@
 get_header();
 $response = file_get_contents("https://dl.sammakqoran.com/metadata.json");
 $cached_durations = json_decode($response, true);
+$video_page = get_page_by_path("video", OBJECT, array('page'));
+$audio_page = get_page_by_path("audio", OBJECT, array('page'));
+$blog_page = get_page_by_path("standard", OBJECT, array('page'));
+$audio_page_link = get_permalink($video_page?->ID);
+$video_page_link = get_permalink($audio_page?->ID);
+$blog_page_link = get_permalink($blog_page?->ID);
 ?>
 <main class="main flex column ai-center max-width fluid-width">
   <section class="splide header-carousel" aria-label="بنرهای هدر">
@@ -112,6 +118,14 @@ $cached_durations = json_decode($response, true);
       <header class="carousel-header flex ai-center">
         <img class="carousel-icon" src="<?php echo get_template_directory_uri(); ?>/icons/video.svg" alt="ویدیو">
         <h1 class="main-title">جدیدترین ویدیوها</h1>
+        <a class="button-container button-32" href="<?php echo $video_page_link; ?>">
+          <div class="button-face green-button text-button">
+            <div class="button-text">نمایش همه</div>
+            <div class="button-glow"></div>
+            <div class="button-hover"></div>
+          </div>
+          <div class="button-hitbox"></div>
+        </a>
         <div class="splide__arrows flex">
           <button class="splide__arrow splide__arrow--prev button-container button-32">
             <div class="button-face green-button">
@@ -142,6 +156,17 @@ $cached_durations = json_decode($response, true);
           }
           wp_reset_postdata();
           ?>
+          <li class="splide__slide">
+            <div class="button-container-slide flex jc-center ai-center">
+              <a class="button-container button-48" href="<?php echo $video_page_link; ?>">
+                <div class="button-face yellow-button text-button">
+                  <div class="button-text">نمایش همه</div>
+                  <div class="button-glow"></div>
+                  <div class="button-hover"></div>
+                </div>
+              </a>
+            </div>
+          </li>
         </ul>
       </div>
     </section>
@@ -165,6 +190,14 @@ $cached_durations = json_decode($response, true);
       <header class="carousel-header flex ai-center">
         <img class="carousel-icon" src="<?php echo get_template_directory_uri(); ?>/icons/audio.svg" alt="صدا">
         <h1 class="main-title">جدیدترین صداها</h1>
+        <a class="button-container button-32" href="<?php echo $audio_page_link; ?>">
+          <div class="button-face green-button text-button">
+            <div class="button-text">نمایش همه</div>
+            <div class="button-glow"></div>
+            <div class="button-hover"></div>
+          </div>
+          <div class="button-hitbox"></div>
+        </a>
         <div class="splide__arrows flex">
           <button class="splide__arrow splide__arrow--prev button-container button-32">
             <div class="button-face green-button">
@@ -194,8 +227,18 @@ $cached_durations = json_decode($response, true);
             echo '</li>';
           }
           wp_reset_postdata();
-
           ?>
+          <li class="splide__slide">
+            <div class="button-container-slide flex jc-center ai-center">
+              <a class="button-container button-48" href="<?php echo $audio_page_link; ?>">
+                <div class="button-face yellow-button text-button">
+                  <div class="button-text">نمایش همه</div>
+                  <div class="button-glow"></div>
+                  <div class="button-hover"></div>
+                </div>
+              </a>
+            </div>
+          </li>
         </ul>
       </div>
     </section>
@@ -229,6 +272,14 @@ $cached_durations = json_decode($response, true);
       <header class="carousel-header flex ai-center">
         <img class="carousel-icon" src="<?php echo get_template_directory_uri(); ?>/icons/blog.svg" alt="مقاله">
         <h1 class="main-title">جدیدترین نوشته‌ها</h1>
+        <a class="button-container button-32" href="<?php echo $blog_page_link; ?>">
+          <div class="button-face green-button text-button">
+            <div class="button-text">نمایش همه</div>
+            <div class="button-glow"></div>
+            <div class="button-hover"></div>
+          </div>
+          <div class="button-hitbox"></div>
+        </a>
         <div class="splide__arrows flex">
           <button class="splide__arrow splide__arrow--prev button-container button-32">
             <div class="button-face green-button">
@@ -258,8 +309,18 @@ $cached_durations = json_decode($response, true);
             echo '</li>';
           }
           wp_reset_postdata();
-
           ?>
+          <li class="splide__slide">
+            <div class="button-container-slide flex jc-center ai-center">
+              <a class="button-container button-48" href="<?php echo $blog_page_link; ?>">
+                <div class="button-face yellow-button text-button">
+                  <div class="button-text">نمایش همه</div>
+                  <div class="button-glow"></div>
+                  <div class="button-hover"></div>
+                </div>
+              </a>
+            </div>
+          </li>
         </ul>
       </div>
     </section>

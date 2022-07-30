@@ -8,6 +8,10 @@ if (isset($_GET['orderby']) && in_array($_GET['orderby'], $orderby_allowed_list)
   $orderby = $_GET['orderby'];
 }
 $cat_id = get_query_var('cat');
+$all_posts_in_category = new WP_Query([
+  'cat' => $cat_id,
+  'posts_per_page' => -1,
+]);
 $args = [
   'order' => $order,
   'posts_per_page' => (get_option('posts_per_page') * $pageNumber) + 1,
@@ -18,8 +22,8 @@ if ($posts->have_posts()) {
 
   // get all playlists of posts in this category
   $playlists = [];
-  while ($posts->have_posts()) {
-    $posts->the_post();
+  while ($all_posts_in_category->have_posts()) {
+    $all_posts_in_category->the_post();
     $playlist = wp_get_post_terms(get_the_ID(), 'playlists')[0] ?? [];
     if (!in_array($playlist, $playlists) && $playlist !== []) {
       array_push($playlists, $playlist);
@@ -53,7 +57,7 @@ if ($posts->have_posts()) {
             foreach ($playlists as $key => $playlist) {
             ?>
               <li class="splide__slide">
-                <a class="button-container button-48" href="<?php echo $playlist->slug ?? ''; ?>">
+                <a class="button-container button-48" href="<?php echo get_term_link($playlist->slug, 'playlists') ?? ''; ?>">
                   <div class="button-face white-button text-button">
                     <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/playlist.svg" alt="">
                     <div class="button-text"><?php echo $playlist->name ?? ''; ?></div>

@@ -191,10 +191,26 @@ add_action('publish_post', 'call_the_endpoint', 10, 2);
 function call_the_endpoint($post_id, $post)
 {
     $post_type = $post->post_type;
+    $content = $post->post_content;
+    $src  = [];
     if ($post_type == 'video') {
-        $url = "https://dl.sammakqoran.com/";
-        wp_remote_request($url, ['method' => 'GET']);
+        preg_match_all('/(src)=("[^"]*")/i', $content, $src);
+        if (count($src[2]) > 0) {
+            $src = (str_replace('"', '', $src[2][0]));
+        } else {
+            $src = "";
+        }
+    } else if ($post_type == 'audio') {
+        preg_match_all('/(src)=("[^"]*")/i', $content, $src);
+        if (count($src[2]) > 0) {
+            $src = (str_replace('"', '', $src[2][0]));
+        } else {
+            $src = "";
+        }
     }
+    $url = "https://dl.sammakqoran.com/";
+    $url .= $src === "" ? $src : "";
+    wp_remote_request($url, ['method' => 'GET']);
 }
 
 

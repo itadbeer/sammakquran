@@ -120,7 +120,7 @@ $blog_page_link = get_permalink($blog_page?->ID);
         <h1 class="main-title">جدیدترین ویدیوها</h1>
         <a class="button-container button-32" href="<?php echo $video_page_link; ?>">
           <div class="button-face green-button text-button">
-            <div class="button-text">نمایش همه</div>
+            <div class="button-text">همه</div>
             <div class="button-glow"></div>
             <div class="button-hover"></div>
           </div>
@@ -192,7 +192,7 @@ $blog_page_link = get_permalink($blog_page?->ID);
         <h1 class="main-title">جدیدترین صداها</h1>
         <a class="button-container button-32" href="<?php echo $audio_page_link; ?>">
           <div class="button-face green-button text-button">
-            <div class="button-text">نمایش همه</div>
+            <div class="button-text">همه</div>
             <div class="button-glow"></div>
             <div class="button-hover"></div>
           </div>
@@ -274,7 +274,7 @@ $blog_page_link = get_permalink($blog_page?->ID);
         <h1 class="main-title">جدیدترین نوشته‌ها</h1>
         <a class="button-container button-32" href="<?php echo $blog_page_link; ?>">
           <div class="button-face green-button text-button">
-            <div class="button-text">نمایش همه</div>
+            <div class="button-text">همه</div>
             <div class="button-glow"></div>
             <div class="button-hover"></div>
           </div>

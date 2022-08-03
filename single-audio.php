@@ -130,6 +130,7 @@ if (count($audio_src[2]) > 0) {
                                 <div class="button-face yellow-button">
                                     <img class="button-icon play-icon" src="<?php echo get_template_directory_uri(); ?>/icons/play.svg" alt="پخش">
                                     <img class="button-icon pause-icon" src="<?php echo get_template_directory_uri(); ?>/icons/pause.svg" alt="توقف">
+                                    <div class="button-glow"></div>
                                     <div class="button-hover"></div>
                                 </div>
                             </button>
@@ -145,9 +146,16 @@ if (count($audio_src[2]) > 0) {
                             <div class="audio-timeline-face" id="timelineFace"></div>
                         </div>
                         <div class="flex jc-sb">
-                            <span id="audioDuration"><?php echo get_media_duration($cached_durations, $audio_src); ?></span>
                             <span id="audioCurrentTime">0:00</span>
+                            <span id="audioDuration"><?php echo get_media_duration($cached_durations, $audio_src); ?></span>
                         </div>
+                        <a class="button-container button-48 download-button" href="<?php echo $audio_src; ?>">
+                            <div class="button-face green-button text-button">
+                                <div class="button-text">دانلود این فایل</div>
+                                <div class="button-glow"></div>
+                                <div class="button-hover"></div>
+                            </div>
+                        </a>
                     </div>
                 <?php } ?>
                 <h2>توضیحات</h2>

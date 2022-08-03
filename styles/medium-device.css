@@ -37,12 +37,19 @@
 
 .bottom-nav {
   bottom: 24px;
+  left: 50%;
 
+  max-width: 512px;
   padding: 0 24px;
+
+  transform: translateX(-50%);
+}
+
+.nav-fab {
+  left: 0;
 }
 
 .bottom-nav-face {
-  max-width: 512px;
   border-radius: 16px;
 
   box-shadow: 0 0 4px 4px rgba(0, 0, 0, .24);
@@ -61,7 +68,7 @@
 }
 
 .nav-reserved-space {
-  height: 88px;
+  height: 168px;
 }
 
 .header-carousel {

@@ -810,14 +810,28 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
   z-index: 4;
 
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: flex-end;
 
   width: 100%;
+}
+
+.nav-fab {
+  position: relative;
+  bottom: 24px;
+  left: 24px;
+
+  order: 1;
+}
+
+.nav-fab .button-face {
+  box-shadow: 0 2px 4px 2px rgba(0, 0, 0, .24);
 }
 
 .bottom-nav-face {
   list-style-type: none;
   
+  order: 2;
   display: flex;
 
   width: 100%;
@@ -934,7 +948,7 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
 }
 
 .nav-reserved-space {
-  height: 64px;
+  height: 144px;
 }
 
 .header-carousel {
@@ -1270,6 +1284,7 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
 .play-button {
   margin: 0 24px;
 }
+
 
 .play-button .pause-icon,
 .play-button.paused .play-icon {

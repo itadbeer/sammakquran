@@ -10,6 +10,15 @@ $audio_page_link = get_permalink($audio_page?->ID);
 $blog_page_link = get_permalink($blog_page?->ID);
 ?>
 <main class="main flex column ai-center max-width fluid-width">
+  <section class="banners-container">
+    <a class="button-container button-banner" href="https://sammakqoran.com/donate">
+      <div class="button-face banner-button text-button" style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/banner.png');">
+        <div class="button-text">برای کمک مالی اینجا کلیک کنید!</div>
+        <div class="button-glow"></div>
+        <div class="button-hover"></div>
+      </div>
+    </a>
+  </section>
   <section class="splide header-carousel" aria-label="بنرهای هدر">
     <div style="position:relative;">
       <div class="splide__arrows flex jc-sb">

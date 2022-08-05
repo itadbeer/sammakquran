@@ -10,6 +10,8 @@ if (isset($_GET['orderby']) && in_array($_GET['orderby'], $orderby_allowed_list)
 $cat_id = get_query_var('cat');
 $all_posts_in_category = new WP_Query([
   'cat' => $cat_id,
+  'orderby' => 'post_date',
+  'order' => 'ASC',
   'posts_per_page' => -1,
 ]);
 $args = [

@@ -365,7 +365,7 @@ $blog_page_link = get_permalink($blog_page?->ID);
 </main>
 <footer class="footer max-width">
   طراحی و توسعه با 🍰 به‌دست
-  <a class="prevent-default" href="https://cilver.net" target="_blank">ادیب</a>
+  <a class="prevent-default" href="https://adibamini.ir" target="_blank">ادیب</a>
   و
   <a class="prevent-default" href="https://edrisranjbar.ir" target="_blank">ادریس</a>
 </footer>

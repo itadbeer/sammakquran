@@ -149,7 +149,7 @@ if (count($audio_src[2]) > 0) {
                             <span id="audioCurrentTime">0:00</span>
                             <span id="audioDuration"><?php echo get_media_duration($cached_durations, $audio_src); ?></span>
                         </div>
-                        <a class="button-container button-48 download-button" href="<?php echo $audio_src; ?>">
+                        <a class="button-container button-48 download-button" href="<?php echo $audio_src; ?>" download>
                             <div class="button-face green-button text-button">
                                 <div class="button-text">دانلود این فایل</div>
                                 <div class="button-glow"></div>

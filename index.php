@@ -90,10 +90,10 @@ $blog_page_link = get_permalink($blog_page?->ID);
         <ul class="splide__list">
           <?php
           $category_ids = get_terms();
-          $categories = get_categories(["orderby" => "post_date", "order" => "ASC"]);
+          $categories = get_cat_list_in_order();
           foreach ($categories as $category) {
-            $category_name = $category->name;
-            $category_link = get_category_link($category->term_id);
+            $category_name = $category['name'];
+            $category_link = get_category_link($category['id']);
           ?>
             <li class="splide__slide">
               <a class="button-container button-48" href="<?php echo $category_link; ?>">

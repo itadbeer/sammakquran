@@ -218,3 +218,30 @@ function get_theme_version()
 {
     return wp_get_theme()->get('Version');
 }
+
+function get_cat_list_in_order()
+{
+    $cats = get_categories();
+    /* get recent post from each category */
+    foreach ($cats as $cat) :
+        $args = array(
+            'numberposts' => 1,
+            'category' => $cat->term_id
+        );
+        $recent_posts = wp_get_recent_posts($args);
+        /* category list */
+        $cat_list[] = array(
+            'id' => $cat->term_id,
+            'name' => $cat->name,
+            'post_date' => $recent_posts[0]['post_date']
+        );
+    endforeach;
+
+    /* sort $cat_list on basis of resent publish post */
+    function sortFunction($a, $b)
+    {
+        return strtotime($a["post_date"]) - strtotime($b["post_date"]) > 1 ? -1 : 1;
+    }
+    usort($cat_list, "sortFunction");
+    return $cat_list;
+}

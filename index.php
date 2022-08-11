@@ -1,7 +1,6 @@
 <?php
 get_header();
-$response = file_get_contents("https://dl.sammakqoran.com/metadata.json");
-$cached_durations = json_decode($response, true);
+$cached_durations = load_metadata();
 $video_page = get_page_by_path("video", OBJECT, array('page'));
 $audio_page = get_page_by_path("audio", OBJECT, array('page'));
 $blog_page = get_page_by_path("standard", OBJECT, array('page'));

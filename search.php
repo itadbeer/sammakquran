@@ -1,7 +1,6 @@
 <?php
 get_header();
-$response = file_get_contents("https://dl.sammakqoran.com/metadata.json");
-$cached_durations = json_decode($response, true);
+$cached_durations = load_metadata();
 $orderby_allowed_list = ['modified', 'date'];
 $orderby = "modified";
 if (isset($_GET['orderby']) && in_array($_GET['orderby'], $orderby_allowed_list)) {

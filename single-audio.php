@@ -1,8 +1,7 @@
 <?php
 $page_type = 'صدا ها';
 get_header();
-$response = file_get_contents("https://dl.sammakqoran.com/metadata.json");
-$cached_durations = json_decode($response, true);
+$cached_durations = load_metadata();
 $playlist = wp_get_post_terms(get_the_ID(), 'playlists')[0] ?? null;
 $args = array(
     'post_type' => 'post',

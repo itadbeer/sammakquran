@@ -168,6 +168,12 @@ function strip_tags_content(string $content, $tags = [])
     return strip_tags($content, $tags);
 }
 
+function load_metadata()
+{
+    $response = file_get_contents("https://dl.sammakqoran.com/metadata.json");
+    return json_decode($response, true);
+}
+
 function get_media_duration($cached_durations, string $url)
 {
     if (array_key_exists($url, $cached_durations)) {

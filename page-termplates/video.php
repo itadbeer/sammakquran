@@ -2,8 +2,7 @@
     Template Name: صفحه ویدیو ها
 */
 get_header();
-$response = file_get_contents("https://dl.sammakqoran.com/metadata.json");
-$cached_durations = json_decode($response, true);
+$cached_durations = load_metadata();
 $order = $_GET['order'] ?? 'DESC';
 $pageNumber = $_GET['pageNumber'] ?? 1;
 $categories = $_GET['category'] ?? [];

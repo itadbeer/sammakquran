@@ -1,7 +1,6 @@
 <?php
 get_header();
-$response = file_get_contents("https://dl.sammakqoran.com/metadata.json");
-$cached_durations = json_decode($response, true);
+$cached_durations = load_metadata();
 $args = array(
   'post_type' => 'post',
   'posts_per_page' => -1,

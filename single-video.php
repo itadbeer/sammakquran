@@ -2,7 +2,7 @@
 get_header();
 $page_type = 'ویدیو ها';
 $playlist = wp_get_post_terms(get_the_ID(), 'playlists')[0] ?? null;
-$cached_durations = load_metadata();
+
 $args = array(
   'post_type' => 'post',
   'tax_query' => array(
@@ -124,7 +124,7 @@ $video_cover_src = get_the_post_thumbnail_url(get_the_ID(), 'full');
         if ($query->have_posts()) {
           while ($query->have_posts()) {
             $query->the_post();
-            get_template_part('template-parts/content', get_post_format(),  args: ["cached_durations" => $cached_durations, "term_title" => $term_title]);
+            get_template_part('template-parts/content', get_post_format(),  args: ["term_title" => $term_title]);
           }
           wp_reset_postdata();
         }

@@ -39,7 +39,7 @@ if (count($audio_src[2]) > 0) {
                     <?php } ?>
                 </div>
 
-                <div class="post-duration"><?php echo get_media_duration($args['cached_durations'], $audio_src); ?></div>
+                <!-- <div class="post-duration">0:00</div> -->
             </div>
         </div>
     </a>

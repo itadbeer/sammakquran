@@ -26,8 +26,7 @@ if (count($video_src[2]) > 0) {
                         <span><?php echo $playlist; ?></span>
                     <?php } ?>
                 </div>
-                <div class="post-duration">
-                    <?php echo get_media_duration($args['cached_durations'], $video_src); ?></div>
+                <!-- <div class="post-duration">0:00</div> -->
             </div>
             <h2 class="post-title"><?php echo get_the_title(); ?></h2>
             <div class="post-info">

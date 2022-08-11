@@ -1,6 +1,6 @@
 <?php
 get_header();
-$cached_durations = load_metadata();
+
 $video_page = get_page_by_path("video", OBJECT, array('page'));
 $audio_page = get_page_by_path("audio", OBJECT, array('page'));
 $blog_page = get_page_by_path("standard", OBJECT, array('page'));
@@ -159,7 +159,7 @@ $blog_page_link = get_permalink($blog_page?->ID);
           while ($query->have_posts()) {
             $query->the_post();
             echo '<li class="splide__slide">';
-            get_template_part('template-parts/content', get_post_format(), args: ['cached_durations' => $cached_durations]);
+            get_template_part('template-parts/content', get_post_format());
             echo '</li>';
           }
           wp_reset_postdata();
@@ -231,7 +231,7 @@ $blog_page_link = get_permalink($blog_page?->ID);
           while ($query->have_posts()) {
             $query->the_post();
             echo '<li class="splide__slide">';
-            get_template_part('template-parts/content', get_post_format(), args: ['cached_durations' => $cached_durations]);
+            get_template_part('template-parts/content', get_post_format());
             echo '</li>';
           }
           wp_reset_postdata();

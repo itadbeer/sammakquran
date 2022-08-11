@@ -1,6 +1,5 @@
 <?php
 get_header();
-$cached_durations = load_metadata();
 $order = $_GET['order'] ?? 'DESC';
 $pageNumber = $_GET['pageNumber'] ?? 1;
 if (isset($_GET['orderby']) && in_array($_GET['orderby'], $orderby_allowed_list)) {
@@ -90,7 +89,7 @@ if ($posts->have_posts()) {
       $counter = 0;
       while ($posts->have_posts()) {
         $posts->the_post();
-        get_template_part('template-parts/content', get_post_format(), args: ['cached_durations' => $cached_durations, 'counter' => ++$counter]);
+        get_template_part('template-parts/content', get_post_format(), args: ['counter' => ++$counter]);
       }
       wp_reset_postdata();
       ?>

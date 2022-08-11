@@ -1,6 +1,6 @@
 <?php
 get_header();
-$cached_durations = load_metadata();
+
 $orderby_allowed_list = ['modified', 'date'];
 $orderby = "modified";
 if (isset($_GET['orderby']) && in_array($_GET['orderby'], $orderby_allowed_list)) {
@@ -103,7 +103,7 @@ $query = new WP_Query($args);
             $counter = 0;
             while ($query->have_posts()) {
                 $query->the_post();
-                get_template_part('template-parts/content', get_post_format(), args: ['cached_durations' => $cached_durations, 'counter' => ++$counter]);
+                get_template_part('template-parts/content', get_post_format(), args: ['counter' => ++$counter]);
             }
 
             wp_reset_postdata();

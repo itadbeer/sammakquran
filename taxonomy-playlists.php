@@ -1,6 +1,6 @@
 <?php
 get_header();
-$cached_durations = load_metadata();
+
 $args = array(
   'post_type' => 'post',
   'posts_per_page' => -1,
@@ -96,7 +96,7 @@ switch ($playlist_type) {
       if ($query->have_posts()) {
         while ($query->have_posts()) {
           $query->the_post();
-          get_template_part('template-parts/content', get_post_format(), args: ['cached_durations' => $cached_durations]);
+          get_template_part('template-parts/content', get_post_format());
         }
       }
       wp_reset_postdata();

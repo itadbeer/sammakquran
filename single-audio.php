@@ -1,7 +1,7 @@
 <?php
 $page_type = 'صدا ها';
 get_header();
-$cached_durations = load_metadata();
+
 $playlist = wp_get_post_terms(get_the_ID(), 'playlists')[0] ?? null;
 $args = array(
     'post_type' => 'post',
@@ -146,7 +146,7 @@ if (count($audio_src[2]) > 0) {
                         </div>
                         <div class="flex jc-sb">
                             <span id="audioCurrentTime">0:00</span>
-                            <span id="audioDuration"><?php echo get_media_duration($cached_durations, $audio_src); ?></span>
+                            <span id="audioDuration">0:00</span>
                         </div>
                         <a class="button-container button-48 download-button" href="<?php echo $audio_src; ?>" download>
                             <div class="button-face green-button text-button">
@@ -171,7 +171,7 @@ if (count($audio_src[2]) > 0) {
                 if ($query->have_posts()) {
                     while ($query->have_posts()) {
                         $query->the_post();
-                        get_template_part('template-parts/content', get_post_format(),  args: ["cached_durations" => $cached_durations, "term_title" => $term_title]);
+                        get_template_part('template-parts/content', get_post_format(),  args: ["term_title" => $term_title]);
                     }
                     wp_reset_postdata();
                 }

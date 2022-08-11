@@ -219,9 +219,16 @@ function get_theme_version()
     return wp_get_theme()->get('Version');
 }
 
-function get_cat_list_in_order()
+function get_cat_list_in_order($category = null)
 {
-    $cats = get_categories(['parent' => 0, 'hide_empty' => true]);
+    if (is_null($category)) {
+        $args = ['parent' => 0, 'hide_empty' => true];
+    } else {
+        // get subcategories
+        $args = ['parent' => $category, 'hide_empty' => true];
+    }
+    $cats = get_categories($args);
+    $cat_list = [];
     /* get recent post from each category */
     foreach ($cats as $cat) :
         $args = array(
@@ -242,6 +249,8 @@ function get_cat_list_in_order()
     {
         return strtotime($a["post_date"]) - strtotime($b["post_date"]) > 1 ? -1 : 1;
     }
-    usort($cat_list, "sortFunction");
+    if (is_array($cat_list) && count($cat_list) > 0) {
+        usort($cat_list, "sortFunction");
+    }
     return $cat_list;
 }

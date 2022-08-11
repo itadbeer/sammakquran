@@ -221,12 +221,12 @@ function get_theme_version()
 
 function get_cat_list_in_order()
 {
-    $cats = get_categories();
+    $cats = get_categories(['parent' => 0, 'hide_empty' => true]);
     /* get recent post from each category */
     foreach ($cats as $cat) :
         $args = array(
             'numberposts' => 1,
-            'category' => $cat->term_id
+            'category' => $cat->term_id,
         );
         $recent_posts = wp_get_recent_posts($args);
         /* category list */

@@ -1,6 +1,7 @@
 'use strict';
 
 let postsSliders = document.getElementsByClassName('posts-carousel');
+let categoriesSliders = document.getElementsByClassName('categories-carousel');
 
 if (document.querySelector('.header-carousel')) {
   new Splide('.header-carousel', {
@@ -20,14 +21,16 @@ if (document.querySelector('.header-carousel')) {
 }
 
 if (document.querySelector('.categories-carousel')) {
-  new Splide('.categories-carousel', {
-    direction: 'rtl',
-    pagination: false,
-    perMove: 1,
-    gap: 16,
-    autoWidth: true,
-    trimSpace: 'move',
-  }).mount();
+  for (let i = 0; i < categoriesSliders.length; i++) {
+    new Splide(categoriesSliders[i], {
+      direction: 'rtl',
+      pagination: false,
+      perMove: 1,
+      gap: 16,
+      autoWidth: true,
+      trimSpace: 'move',
+    }).mount();
+  }
 }
 
 if (document.querySelector('.posts-carousel')) {

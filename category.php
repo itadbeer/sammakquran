@@ -18,8 +18,8 @@ $args = [
   "cat"           => $cat_id,
 ];
 $posts = new WP_Query($args);
+$categories = get_cat_list_in_order($cat_id);
 if ($posts->have_posts()) {
-
   // get all playlists of posts in this category
   $playlists = [];
   while ($all_posts_in_category->have_posts()) {
@@ -29,90 +29,90 @@ if ($posts->have_posts()) {
       array_push($playlists, $playlist);
     }
   }
-
 ?>
   <main class="main flex column ai-center max-width fluid-width">
-    <section class="splide categories-carousel" aria-label="دسته‌بندی‌ها">
-      <div style="position:relative;">
-        <div class="splide__arrows flex jc-sb">
-          <button class="splide__arrow splide__arrow--prev button-container button-48">
-            <div class="button-face green-button">
-              <img class="button-icon" src="icons/back.svg" alt="">
-              <div class="button-glow"></div>
-              <div class="button-hover"></div>
-            </div>
-          </button>
-          <button class="splide__arrow splide__arrow--next button-container button-48">
-            <div class="button-face green-button">
-              <img class="button-icon" src="icons/back.svg" alt="">
-              <div class="button-glow"></div>
-              <div class="button-hover"></div>
-            </div>
-          </button>
+    <?php if (!empty($categories)) { ?>
+      <section class="splide categories-carousel" aria-label="دسته‌بندی‌ها">
+        <div style="position:relative;">
+          <div class="splide__arrows flex jc-sb">
+            <button class="splide__arrow splide__arrow--prev button-container button-48">
+              <div class="button-face green-button">
+                <img class="button-icon" src="icons/back.svg" alt="">
+                <div class="button-glow"></div>
+                <div class="button-hover"></div>
+              </div>
+            </button>
+            <button class="splide__arrow splide__arrow--next button-container button-48">
+              <div class="button-face green-button">
+                <img class="button-icon" src="icons/back.svg" alt="">
+                <div class="button-glow"></div>
+                <div class="button-hover"></div>
+              </div>
+            </button>
+          </div>
+          <div class="splide__track">
+            <ul class="splide__list">
+              <?php
+              foreach ($categories as $category) {
+                $category_name = $category['name'];
+                $category_link = get_category_link($category['id']);
+              ?>
+                <li class="splide__slide">
+                  <a class="button-container button-48" href="<?php echo $category_link; ?>">
+                    <div class="button-face white-button text-button">
+                      <div class="button-text"><?php echo $category_name; ?></div>
+                      <div class="button-hover"></div>
+                    </div>
+                  </a>
+                </li>
+              <?php }
+              ?>
+            </ul>
+          </div>
         </div>
-        <div class="splide__track">
-          <ul class="splide__list">
-            <?php
-            $category_ids = get_terms();
-            $categories = get_cat_list_in_order($cat_id);
-            foreach ($categories as $category) {
-              $category_name = $category['name'];
-              $category_link = get_category_link($category['id']);
-            ?>
-              <li class="splide__slide">
-                <a class="button-container button-48" href="<?php echo $category_link; ?>">
-                  <div class="button-face white-button text-button">
-                    <div class="button-text"><?php echo $category_name; ?></div>
-                    <div class="button-hover"></div>
-                  </div>
-                </a>
-              </li>
-            <?php }
-            ?>
-          </ul>
+      </section>
+    <?php }
+    if (!empty($playlists)) { ?>
+      <section class="splide categories-carousel" aria-label="مجموعه‌های این دسته">
+        <div style="position:relative;">
+          <div class="splide__arrows flex jc-sb">
+            <button class="splide__arrow splide__arrow--prev button-container button-48">
+              <div class="button-face green-button">
+                <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="">
+                <div class="button-glow"></div>
+                <div class="button-hover"></div>
+              </div>
+            </button>
+            <button class="splide__arrow splide__arrow--next button-container button-48">
+              <div class="button-face green-button">
+                <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="">
+                <div class="button-glow"></div>
+                <div class="button-hover"></div>
+              </div>
+            </button>
+          </div>
+          <div class="splide__track">
+            <ul class="splide__list">
+              <?php
+              foreach ($playlists as $key => $playlist) {
+              ?>
+                <li class="splide__slide">
+                  <a class="button-container button-48" href="<?php echo get_term_link($playlist->slug, 'playlists') ?? ''; ?>">
+                    <div class="button-face white-button text-button">
+                      <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/playlist.svg" alt="">
+                      <div class="button-text"><?php echo $playlist->name ?? ''; ?></div>
+                      <div class="button-hover"></div>
+                    </div>
+                  </a>
+                </li>
+              <?php
+              }
+              ?>
+            </ul>
+          </div>
         </div>
-      </div>
-    </section>
-    <section class="splide categories-carousel" aria-label="مجموعه‌های این دسته">
-      <div style="position:relative;">
-        <div class="splide__arrows flex jc-sb">
-          <button class="splide__arrow splide__arrow--prev button-container button-48">
-            <div class="button-face green-button">
-              <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="">
-              <div class="button-glow"></div>
-              <div class="button-hover"></div>
-            </div>
-          </button>
-          <button class="splide__arrow splide__arrow--next button-container button-48">
-            <div class="button-face green-button">
-              <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="">
-              <div class="button-glow"></div>
-              <div class="button-hover"></div>
-            </div>
-          </button>
-        </div>
-        <div class="splide__track">
-          <ul class="splide__list">
-            <?php
-            foreach ($playlists as $key => $playlist) {
-            ?>
-              <li class="splide__slide">
-                <a class="button-container button-48" href="<?php echo get_term_link($playlist->slug, 'playlists') ?? ''; ?>">
-                  <div class="button-face white-button text-button">
-                    <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/playlist.svg" alt="">
-                    <div class="button-text"><?php echo $playlist->name ?? ''; ?></div>
-                    <div class="button-hover"></div>
-                  </div>
-                </a>
-              </li>
-            <?php
-            }
-            ?>
-          </ul>
-        </div>
-      </div>
-    </section>
-
+      </section>
+    <?php } ?>
     <header class="main-header relative">
       <h1 class="main-title"><?php echo single_cat_title(); ?></h1>
       <button class="button-container button-48" onclick="openFilters()">

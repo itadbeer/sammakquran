@@ -6,6 +6,7 @@ $slider = new WP_Query(
     'posts_per_page' => 10,
   ]
 );
+$categories = get_cat_list_in_order();
 $video_page = get_page_by_path("video", OBJECT, array('page'));
 $audio_page = get_page_by_path("audio", OBJECT, array('page'));
 $blog_page = get_page_by_path("standard", OBJECT, array('page'));
@@ -65,58 +66,57 @@ $blog_page_link = get_permalink($blog_page?->ID);
         </div>
       </div>
     </section>
-  <?php } ?>
-  <section class="splide categories-carousel" aria-label="دسته‌بندی‌ها">
-    <div style="position:relative;">
-      <div class="splide__arrows flex jc-sb">
-        <button class="splide__arrow splide__arrow--prev button-container button-48">
-          <div class="button-face green-button">
-            <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="قبلی">
-            <div class="button-glow"></div>
-            <div class="button-hover"></div>
-          </div>
-        </button>
-        <button class="splide__arrow splide__arrow--next button-container button-48">
-          <div class="button-face green-button">
-            <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="بعدی">
-            <div class="button-glow"></div>
-            <div class="button-hover"></div>
-          </div>
-        </button>
+  <?php }
+  if (count($categories) > 0) { ?>
+    <section class="splide categories-carousel" aria-label="دسته‌بندی‌ها">
+      <div style="position:relative;">
+        <div class="splide__arrows flex jc-sb">
+          <button class="splide__arrow splide__arrow--prev button-container button-48">
+            <div class="button-face green-button">
+              <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="قبلی">
+              <div class="button-glow"></div>
+              <div class="button-hover"></div>
+            </div>
+          </button>
+          <button class="splide__arrow splide__arrow--next button-container button-48">
+            <div class="button-face green-button">
+              <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="بعدی">
+              <div class="button-glow"></div>
+              <div class="button-hover"></div>
+            </div>
+          </button>
+        </div>
+        <div class="splide__track">
+          <ul class="splide__list">
+            <?php
+            foreach ($categories as $category) {
+              $category_name = $category['name'];
+              $category_link = get_category_link($category['id']);
+            ?>
+              <li class="splide__slide">
+                <a class="button-container button-48" href="<?php echo $category_link; ?>">
+                  <div class="button-face white-button text-button">
+                    <div class="button-text"><?php echo $category_name; ?></div>
+                    <div class="button-hover"></div>
+                  </div>
+                </a>
+              </li>
+            <?php }
+            ?>
+          </ul>
+        </div>
       </div>
-      <div class="splide__track">
-        <ul class="splide__list">
-          <?php
-          $category_ids = get_terms();
-          $categories = get_cat_list_in_order();
-          foreach ($categories as $category) {
-            $category_name = $category['name'];
-            $category_link = get_category_link($category['id']);
-          ?>
-            <li class="splide__slide">
-              <a class="button-container button-48" href="<?php echo $category_link; ?>">
-                <div class="button-face white-button text-button">
-                  <div class="button-text"><?php echo $category_name; ?></div>
-                  <div class="button-hover"></div>
-                </div>
-              </a>
-            </li>
-          <?php }
-          ?>
-        </ul>
-      </div>
-    </div>
-  </section>
-  <?php
+    </section>
+  <?php  }
   $query = new WP_Query(array(
     'tax_query' => array(
-      array(
+      [
         'taxonomy' => 'post_format',
         'field' => 'slug',
         'terms' => ['post-format-video'],
         'orderby' => "date",
         'order' => 'DESC'
-      )
+      ],
     )
   ));
   if ($query->have_posts()) {
@@ -177,9 +177,7 @@ $blog_page_link = get_permalink($blog_page?->ID);
         </ul>
       </div>
     </section>
-  <?php } ?>
-
-  <?php
+  <?php }
   $query = new WP_Query(array(
     'tax_query' => array(
       array(

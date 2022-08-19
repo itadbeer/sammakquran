@@ -1,6 +1,11 @@
 <?php
 get_header();
-
+$slider = new WP_Query(
+  [
+    'post_type' => 'sliders',
+    'posts_per_page' => 10,
+  ]
+);
 $video_page = get_page_by_path("video", OBJECT, array('page'));
 $audio_page = get_page_by_path("audio", OBJECT, array('page'));
 $blog_page = get_page_by_path("standard", OBJECT, array('page'));
@@ -18,36 +23,30 @@ $blog_page_link = get_permalink($blog_page?->ID);
       </div>
     </a>
   </section>
-  <section class="splide header-carousel" aria-label="بنرهای هدر">
-    <div style="position:relative;">
-      <div class="splide__arrows flex jc-sb">
-        <button class="splide__arrow splide__arrow--prev button-container button-32">
-          <div class="button-face green-button">
-            <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="قبلی">
-            <div class="button-glow"></div>
-            <div class="button-hover"></div>
-          </div>
-          <div class="button-hitbox"></div>
-        </button>
-        <button class="splide__arrow splide__arrow--next button-container button-32">
-          <div class="button-face green-button">
-            <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="بعدی">
-            <div class="button-glow"></div>
-            <div class="button-hover"></div>
-          </div>
-          <div class="button-hitbox"></div>
-        </button>
-      </div>
-      <div class="splide__track">
-        <ul class="splide__list">
-          <?php
-          $slider = new WP_Query(
-            [
-              'post_type' => 'sliders',
-              'posts_per_page' => 10,
-            ]
-          );
-          if ($slider->have_posts()) {
+  <?php if ($slider->have_posts()) { ?>
+    <section class="splide header-carousel" aria-label="بنرهای هدر">
+      <div style="position:relative;">
+        <div class="splide__arrows flex jc-sb">
+          <button class="splide__arrow splide__arrow--prev button-container button-32">
+            <div class="button-face green-button">
+              <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="قبلی">
+              <div class="button-glow"></div>
+              <div class="button-hover"></div>
+            </div>
+            <div class="button-hitbox"></div>
+          </button>
+          <button class="splide__arrow splide__arrow--next button-container button-32">
+            <div class="button-face green-button">
+              <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/back.svg" alt="بعدی">
+              <div class="button-glow"></div>
+              <div class="button-hover"></div>
+            </div>
+            <div class="button-hitbox"></div>
+          </button>
+        </div>
+        <div class="splide__track">
+          <ul class="splide__list">
+            <?php
             while ($slider->have_posts()) {
               $slider->the_post();
               $slider_id = get_post_thumbnail_id($slider->get_the_ID());
@@ -61,12 +60,12 @@ $blog_page_link = get_permalink($blog_page?->ID);
               echo '</li>';
             }
             wp_reset_postdata();
-          }
-          ?>
-        </ul>
+            ?>
+          </ul>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  <?php } ?>
   <section class="splide categories-carousel" aria-label="دسته‌بندی‌ها">
     <div style="position:relative;">
       <div class="splide__arrows flex jc-sb">

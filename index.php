@@ -334,29 +334,28 @@ $blog_page_link = get_permalink($blog_page?->ID);
   <section class="about-section flex ai-center revealable">
     <div class="about-img flex jc-center">
       <?php
-      $page = get_page_by_path('about');
-      $thumbnail_id = get_post_thumbnail_id($page);
-      $thumbnail_src = get_the_post_thumbnail_url($page) ? get_the_post_thumbnail_url($page) : get_template_directory_uri() . "/images/placeholder.svg";
-      $thumbnail_alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true) == "" ? get_the_title() : get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
+      $about_page = get_page_by_path('about');
+      if ($about_page) {
+        $thumbnail_id = get_post_thumbnail_id($about_page);
+        $thumbnail_src = get_the_post_thumbnail_url($about_page) ? get_the_post_thumbnail_url($about_page) : get_template_directory_uri() . "/images/placeholder.svg";
+        $thumbnail_alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true) == "" ? get_the_title() : get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
       ?>
-      <img src="<?php echo $thumbnail_src; ?>" alt="<?php echo $thumbnail_alt; ?>">
+        <img src="<?php echo $thumbnail_src; ?>" alt="<?php echo $thumbnail_alt; ?>">
     </div>
-    <!-- Display about page as a widget-->
-    <?php
-    if ($page) {
-      echo '<div class="about-text flex column">';
-      echo '<h1 class="main-title"> ' . $page->post_title . '</h1>';
-      echo '<p>' . $page->post_content . '</p>';
-      echo '<a class="button-container button-48" href=' . get_permalink($page) . '>
-      <div class="button-face yellow-button text-button">
-        <div class="button-text">بیشتر بخوانید</div>
-        <div class="button-glow"></div>
-        <div class="button-hover"></div>
-      </div>
-    </a>';
-      echo '</div>';
-    }
-    ?>
+  <?php
+        echo '<div class="about-text flex column">';
+        echo '<h1 class="main-title"> ' . $about_page->post_title . '</h1>';
+        echo '<p>' . $about_page->post_content . '</p>';
+        echo '<a class="button-container button-48" href=' . get_permalink($about_page) . '>
+              <div class="button-face yellow-button text-button">
+                <div class="button-text">بیشتر بخوانید</div>
+                <div class="button-glow"></div>
+                <div class="button-hover"></div>
+              </div>
+        </a>';
+        echo '</div>';
+      }
+  ?>
   </section>
 </main>
 <footer class="footer max-width">

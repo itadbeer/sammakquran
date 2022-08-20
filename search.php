@@ -8,11 +8,11 @@ if (isset($_GET['orderby']) && in_array($_GET['orderby'], $orderby_allowed_list)
 }
 global $query_string;
 global $query;
-$pageNumber = $_GET['pageNumber'] ?? 1;
+$pageNumber = max($_GET['pageNumber'] ?? 1, 1);
 $s = get_query_var('s');
 $args = [
     "s"             => $s,
-    'posts_per_page' => get_option('posts_per_page') * $pageNumber,
+    'paged' => $pageNumber,
     "post_type"     => "post",
     "post_status"   => "publish",
     "orderby"       => $orderby
@@ -109,17 +109,9 @@ $query = new WP_Query($args);
             wp_reset_postdata();
             ?>
         </section>
-        <?php if ($query->max_num_pages > 1) { ?>
-            <form class="view-more-container flex jc-center">
-                <button class="button-container button-48" name="pageNumber" value="<?php echo ++$pageNumber; ?>" onclick="getPostCardsCount()">
-                    <div class="button-face yellow-button text-button">
-                        <div class="button-text">بیشتر</div>
-                        <div class="button-glow"></div>
-                        <div class="button-hover"></div>
-                    </div>
-                </button>
-            </form>
-        <?php } ?>
+        <?php
+        display_pagination($query, $pageNumber);
+        ?>
     </main>
 <?php } else {
     get_template_part('template-parts/empty-state', args: ['title' => 'درحال حاضر محتوایی وجود ندارد']);

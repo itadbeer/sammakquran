@@ -51,33 +51,33 @@ function hideSnackbar() {
   snackbar.classList.remove('show');
 }
 
-// function handleScrollAnimation(el) {
-//   if (el.getBoundingClientRect().top <= (window.innerHeight || document.documentElement.clientHeight) &&
-//     el.getBoundingClientRect().bottom >= (window.clientTop || document.documentElement.clientTop)) {
-//     el.style.transform = 'scale(1)';
-//   } else {
-//     el.style.transform = 'scale(0)';
-//   }
-// }
+function goToSelectedPage(thisElem) {
+  let params = new URLSearchParams(window.location.search);
 
-// window.addEventListener('scroll', function () {
-//   scrollEls.forEach(handleScrollAnimation);
-// });
-
-if (document.querySelector('.posts-grid .post-container#p1') && sessionStorage.postCardsCount) {
-  let postCardsCount = Number(sessionStorage.postCardsCount);
-  let scrollToPost = document.getElementById(`p${postCardsCount + 1}`);
-
-  window.addEventListener('load', function () {
-    document.querySelector('html').style.scrollBehavior = 'auto';
-    window.scrollTo(0, scrollToPost.offsetTop - 16);
-    document.querySelector('html').style.scrollBehavior = null;
-    sessionStorage.removeItem('postCardsCount');
-  });
+  params.set('pageNumber', thisElem.value);
+  window.location.search = params;
 }
 
-function getPostCardsCount() {
-  let postCards = document.querySelectorAll('.posts-grid .post-container');
-  
-  sessionStorage.postCardsCount = postCards.length;
+function goToNextPage() {
+  let params = new URLSearchParams(window.location.search);
+  let pageNumber = Number(params.get('pageNumber'));
+
+  if (pageNumber === 0) {
+    params.set('pageNumber', 2);
+  } else {
+    params.set('pageNumber', pageNumber + 1);
+  }
+  window.location.search = params;
 }
+
+function goToPrevPage() {
+  let params = new URLSearchParams(window.location.search);
+  let pageNumber = Number(params.get('pageNumber'));
+
+  if (pageNumber <= 1) {
+    params.set('pageNumber', 1);
+  } else {
+    params.set('pageNumber', pageNumber - 1);
+  }
+  window.location.search = params;
+} 

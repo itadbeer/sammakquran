@@ -254,3 +254,39 @@ function get_cat_list_in_order($category = null)
     }
     return $cat_list;
 }
+
+function display_pagination($query, $pageNumber)
+{
+    if ($query->max_num_pages == 1) {
+        return;
+    }
+    $output = "";
+    $output .= '<section class="view-more-container flex jc-center">';
+    if ($pageNumber != 1) {
+        $output .= '<button class="button-container button-48" onclick="goToPrevPage()">
+        <div class="button-face green-button text-button">
+            <div class="button-text">صفحۀ قبل</div>
+            <div class="button-glow"></div>
+            <div class="button-hover"></div>
+        </div>
+        </button>';
+    }
+    $output .= '<select name="pageNumber" class="pagination" onchange="goToSelectedPage(this)">';
+    $pages_count = $query->max_num_pages;
+    for ($i = 1; $i <= $pages_count; $i++) {
+        $selected = $i == $pageNumber ? 'selected' : '';
+        $output .= '<option value="' . $i . "\" $selected >$i</option>";
+    }
+    $output .= '</select>';
+    if ($pageNumber != $query->max_num_pages) {
+        $output .= '<button class="button-container button-48" onclick="goToNextPage()">
+        <div class="button-face yellow-button text-button">
+            <div class="button-text">صفحۀ بعد</div>
+            <div class="button-glow"></div>
+            <div class="button-hover"></div>
+        </div>
+        </button>';
+    }
+    $output .= '</section>';
+    echo $output;
+}

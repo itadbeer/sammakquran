@@ -4,21 +4,23 @@
 get_header();
 
 $order = $_GET['order'] ?? 'DESC';
-$pageNumber = $_GET['pageNumber'] ?? 1;
+$pageNumber = max($_GET['pageNumber'] ?? 1, 1);
 $categories = $_GET['category'] ?? [];
 global $query;
-$query = new WP_Query(array(
-    'order' => $order,
-    'posts_per_page' => get_option('posts_per_page') * $pageNumber,
-    'category__in' => $categories,
-    'tax_query' => array(
-        array(
-            'taxonomy' => 'post_format',
-            'field' => 'slug',
-            'terms' => ['post-format-video'],
-        )
-    )
-));
+$query = new WP_Query(
+    [
+        'order' => $order,
+        'paged' => $pageNumber,
+        'category__in' => $categories,
+        'tax_query' => [
+            [
+                'taxonomy' => 'post_format',
+                'field' => 'slug',
+                'terms' => ['post-format-video'],
+            ],
+        ],
+    ]
+);
 if ($query->have_posts()) {
 ?>
     <main class="main flex column ai-center max-width fluid-width">
@@ -44,20 +46,11 @@ if ($query->have_posts()) {
             wp_reset_postdata();
             ?>
         </section>
-        <?php if ($query->max_num_pages > 1) { ?>
-            <form class="view-more-container flex jc-center">
-                <button class="button-container button-48" name="pageNumber" value="<?php echo ++$pageNumber; ?>" onclick="getPostCardsCount()">
-                    <div class="button-face yellow-button text-button">
-                        <div class="button-text">بیشتر</div>
-                        <div class="button-glow"></div>
-                        <div class="button-hover"></div>
-                    </div>
-                </button>
-            </form>
-    <?php }
-    } else {
-        get_template_part('template-parts/empty-state', args: ['title' => 'درحال حاضر ویدیویی وجود ندارد']);
-    } ?>
+    <?php
+    display_pagination($query, $pageNumber);
+} else {
+    get_template_part('template-parts/empty-state', args: ['title' => 'درحال حاضر ویدیویی وجود ندارد']);
+} ?>
     </main>
-    <script src="<?php echo get_template_directory_uri(); ?>/scripts/load_more_post.js"></script>
+
     <?php echo get_footer(); ?>

@@ -19,7 +19,7 @@
             <a class="header-logo" href="<?php echo get_bloginfo('url'); ?>">
                 <?php
                 $custom_logo_id = get_theme_mod('custom_logo');
-                $logo_src = wp_get_attachment_image_src($custom_logo_id, 'full')[0];
+                $logo_src = wp_get_attachment_image_src($custom_logo_id, 'full') ? wp_get_attachment_image_src($custom_logo_id, 'full')[0] : null;
                 if (has_custom_logo()) {
                     $logo_alt = get_post_meta($custom_logo_id, '_wp_attachment_image_alt', true) == "" ? get_bloginfo('name') : get_post_meta($custom_logo_id, '_wp_attachment_image_alt', true);
                     echo '<img src="' . esc_url($logo_src) . '" alt="' . $logo_alt . '">';

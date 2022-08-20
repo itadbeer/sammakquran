@@ -1,5 +1,5 @@
 <?php
-get_header(args: ["hide_bottom_navbar" => true]);
+get_header(null, ["hide_bottom_navbar" => true]);
 ?>
 <main class="main max-width">
     <header class="main-header relative">

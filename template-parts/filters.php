@@ -1,6 +1,5 @@
 <?php
 global $wp;
-
 $category_ids = get_terms();
 $categories = get_categories(["orderby" => "count", "order" => "DESC"]);
 ?>
@@ -8,7 +7,11 @@ $categories = get_categories(["orderby" => "count", "order" => "DESC"]);
 
     <form id="filters" action="" method="GET">
         <h2 class="filters-heading">فیلترها</h2>
-        <?php if ($args['hide_category_filter_options'] === false) { ?>
+        <?php
+        if (is_search()) {
+            echo "<input type=\"hidden\" name=\"s\" value=\"" . get_query_var('s') . "\">";
+        }
+        if ($args['hide_category_filter_options'] === false) { ?>
             <h3 class="filters-category">دسته</h3>
         <?php
             foreach ($categories as $category) {

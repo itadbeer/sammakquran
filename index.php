@@ -331,7 +331,7 @@ $blog_page_link = get_permalink($blog_page?->ID);
     </section>
   <?php } ?>
   <section class="social-media-container">
-    <a class="button-container button-banner" href="https://instagram.com/sammakqoran">
+    <a class="button-container button-banner" href="https://instagram.com/sammakqoran" target="_blank">
       <div class="button-face banner-button text-button button-56" style="background-color: #e1306c;">
         <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/instagram.svg" alt="">
         <div class="button-text">اینستاگرام</div>
@@ -340,7 +340,7 @@ $blog_page_link = get_permalink($blog_page?->ID);
       </div>
     </a>
     <div class="horizontal-divider"></div>
-    <a class="button-container button-banner" href="https://aparat.com/sammakqoran">
+    <a class="button-container button-banner" href="https://aparat.com/sammakqoran" target="_blank">
       <div class="button-face banner-button text-button button-56" style="background-color: #ed145b;">
         <img class="button-icon" src="<?php echo get_template_directory_uri(); ?>/icons/aparat.svg" alt="">
         <div class="button-text">آپارات</div>

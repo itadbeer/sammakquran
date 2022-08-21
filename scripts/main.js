@@ -81,3 +81,19 @@ function goToPrevPage() {
   }
   window.location.search = params;
 } 
+
+function saveFile(url) {    
+  let filename = url.substring(url.lastIndexOf("/") + 1).split("?")[0];
+  let xhr = new XMLHttpRequest();
+  xhr.responseType = 'blob';
+  xhr.onload = function() {
+    let a = document.createElement('a');
+    a.href = window.URL.createObjectURL(xhr.response);
+    a.download = filename; 
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+  };
+  xhr.open('GET', url);
+  xhr.send();
+}

@@ -117,7 +117,7 @@ if (count($audio_src[2]) > 0) {
             <div class="audio-content">
                 <?php if ($audio_src != null) { ?>
                     <div class="audio-controls">
-                        <audio id="audio" src="<?php echo $audio_src; ?>"></audio>
+                        <audio id="audio" src="<?php echo $audio_src; ?>" preload="metadata"></audio>
                         <div class="flex jc-center ai-center">
                             <button id="rewindButton" class="button-container button-48">
                                 <div class="button-face white-button">

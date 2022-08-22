@@ -52,6 +52,10 @@ function seek() {
   audio.currentTime = this.value * audio.duration / 100;
 }
 
+window.addEventListener('load', function () {
+  get(ui.duration).innerText = formatTime(audio.duration);
+});
+
 get(ui.play).addEventListener('click', togglePlay);
 get(ui.rewind).addEventListener('click', function () {
   audio.currentTime -= 10;

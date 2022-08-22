@@ -180,5 +180,5 @@ if (count($audio_src[2]) > 0) {
         <?php } ?>
     </section>
 </main>
-<script src="<?php echo get_template_directory_uri(); ?>/scripts/audio-player.js?v=2"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/scripts/audio-player.js?v=4"></script>
 <?php get_footer(); ?>

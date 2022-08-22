@@ -9,7 +9,7 @@ if (count($video_src[2]) > 0) {
     $video_src = "";
 }
 ?>
-<div class="post-container revealable" id="p<?php echo $args['counter'] ?? ''; ?>">
+<div class="post-container" id="p<?php echo $args['counter'] ?? ''; ?>">
     <a class="prevent-default" href="<?php the_permalink(); ?>">
         <div class="post-face video-post">
             <div class="thumbnail-container">

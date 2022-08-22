@@ -53,7 +53,13 @@ function seek() {
 }
 
 window.addEventListener('load', function () {
-  get(ui.duration).innerText = formatTime(audio.duration);
+  if (isNaN(audio.duration)) {
+    audio.addEventListener('play', function () {
+      get(ui.duration).innerText = formatTime(audio.duration);
+    });
+  } else {
+    get(ui.duration).innerText = formatTime(audio.duration);
+  }
 });
 
 get(ui.play).addEventListener('click', togglePlay);

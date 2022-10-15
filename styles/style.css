@@ -1083,6 +1083,10 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
   margin-top: -24px;
 }
 
+.categories-carousel + .main-header {
+  margin-top: 0;
+}
+
 .categories-carousel .splide__track {
   padding: 24px !important;
 }
@@ -1280,7 +1284,7 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
 .audio-controls {
   direction: ltr;
 
-  padding: 0 8px 24px;
+  padding: 0 8px;
 }
 
 #audio {
@@ -1352,6 +1356,10 @@ input[type="radio"]:checked + .custom-radio .radio-icon {
 .audio-timeline-container + div {
   font-size: var(--fs-small);
   line-height: var(--lh-xshort);
+}
+
+.download-button {
+  margin-bottom: 24px;
 }
 
 .audio-controls .download-button {

@@ -112,6 +112,13 @@ $video_cover_src = get_the_post_thumbnail_url(get_the_ID(), 'full');
         </a>
       <?php } ?>
       <div class="video-content">
+        <a class="button-container button-48 download-button" href="javascript:" download onclick="saveFile('<?php echo $video_src; ?>')">
+          <div class="button-face green-button text-button">
+            <div class="button-text">دانلود این ویدیو</div>
+            <div class="button-glow"></div>
+            <div class="button-hover"></div>
+          </div>
+        </a>
         <h2>توضیحات</h2>
         <?php echo strip_tags_content($content, ["<a>", "<b>", "<i>", "<u>", "<strong>", "<em>", "<p>", "<br>"]); ?>
       </div>

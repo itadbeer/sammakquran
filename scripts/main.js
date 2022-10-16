@@ -51,6 +51,37 @@ function hideSnackbar() {
   snackbar.classList.remove('show');
 }
 
+// function handleScrollAnimation(el) {
+//   if (el.getBoundingClientRect().top <= (window.innerHeight || document.documentElement.clientHeight) &&
+//     el.getBoundingClientRect().bottom >= (window.clientTop || document.documentElement.clientTop)) {
+//     el.style.transform = 'scale(1)';
+//   } else {
+//     el.style.transform = 'scale(0)';
+//   }
+// }
+
+// window.addEventListener('scroll', function () {
+//   scrollEls.forEach(handleScrollAnimation);
+// });
+
+// if (document.querySelector('.posts-grid .post-container#p1') && sessionStorage.postCardsCount) {
+//   let postCardsCount = Number(sessionStorage.postCardsCount);
+//   let scrollToPost = document.getElementById(`p${postCardsCount + 1}`);
+
+//   window.addEventListener('load', function () {
+//     document.querySelector('html').style.scrollBehavior = 'auto';
+//     window.scrollTo(0, scrollToPost.offsetTop - 16);
+//     document.querySelector('html').style.scrollBehavior = null;
+//     sessionStorage.removeItem('postCardsCount');
+//   });
+// }
+
+// function getPostCardsCount() {
+//   let postCards = document.querySelectorAll('.posts-grid .post-container');
+
+//   sessionStorage.postCardsCount = postCards.length;
+// }
+
 function goToSelectedPage(thisElem) {
   let params = new URLSearchParams(window.location.search);
 
@@ -80,20 +111,30 @@ function goToPrevPage() {
     params.set('pageNumber', pageNumber - 1);
   }
   window.location.search = params;
-} 
+}
 
-function saveFile(url) {    
+function saveFile(url) {
   let filename = url.substring(url.lastIndexOf("/") + 1).split("?")[0];
   let xhr = new XMLHttpRequest();
   xhr.responseType = 'blob';
-  xhr.onload = function() {
+  xhr.onload = function () {
     let a = document.createElement('a');
     a.href = window.URL.createObjectURL(xhr.response);
-    a.download = filename; 
+    a.download = filename;
     a.style.display = 'none';
     document.body.appendChild(a);
     a.click();
   };
   xhr.open('GET', url);
   xhr.send();
+}
+
+if (document.querySelector('.download-button')) {
+  let downloadButton = document.querySelector('.download-button');
+
+  downloadButton.addEventListener('click', startLoading);
+}
+
+function startLoading() {
+  this.classList.add('is-loading');
 }

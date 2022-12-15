@@ -153,7 +153,7 @@
   margin-bottom: 0;
 }
 
-.playlist-posts > h2 {
+.playlist-posts>h2 {
   margin-bottom: 24px;
 }
 
@@ -179,8 +179,8 @@
 }
 
 .main-video {
-  position: static;
-  
+  position: relative !important;
+
   width: 100%;
   margin: 0 0 24px;
 }

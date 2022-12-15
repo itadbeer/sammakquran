@@ -130,11 +130,30 @@ function saveFile(url) {
 }
 
 if (document.querySelector('.download-button')) {
-  let downloadButton = document.querySelector('.download-button');
+  let downloadButtons = document.querySelectorAll('.download-button');
 
-  downloadButton.addEventListener('click', startLoading);
+  for (let i = 0; i < downloadButtons.length; i++) {
+    downloadButtons[i].addEventListener('click', startLoading);
+  }
 }
 
 function startLoading() {
   this.classList.add('is-loading');
+}
+
+function switchDownloadButton() {
+  let downloadButtons = document.querySelectorAll('.download-button');
+  let selectedQuality = document.getElementById('downloadQualitySelect').value;
+
+  for (let i = 0; i < downloadButtons.length; i++) {
+    downloadButtons[i].style.display = 'none';
+
+    if (downloadButtons[i].dataset.quality === selectedQuality) {
+      downloadButtons[i].style.display = 'block';
+    }
+  }
+}
+
+if (document.getElementById('downloadQualitySelect')) {
+  switchDownloadButton();
 }

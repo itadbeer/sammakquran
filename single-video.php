@@ -1,3 +1,4 @@
+<script src="scripts/playerjs.js"></script>
 <?php
 get_header();
 $page_type = 'ویدیو ها';
@@ -23,6 +24,11 @@ if (count($video_src[2]) > 0) {
 } else {
   $video_src = null;
 }
+$video_src_arr = [
+  '420p' => $video_src,
+  '720p' => $video_src,
+  '1080p'=>$video_src
+];
 $video_cover_src = get_the_post_thumbnail_url(get_the_ID(), 'full');
 ?>
 <main class="main max-width">
@@ -80,7 +86,19 @@ $video_cover_src = get_the_post_thumbnail_url(get_the_ID(), 'full');
     </div>
   </header>
 
-  <video class="main-video" src="<?php echo $video_src; ?>" controls poster="<?php echo $video_cover_src; ?>"></video>
+  <div id="player" class="main-video"></div>
+  <script>
+    var player = new Playerjs({
+      id: 'player',
+      file:
+        <?php
+        foreach ($video_src_arr as $quality => $value)
+        {
+          echo "'[$quality] $video_src_arr[$quality]', +";
+        }
+        ?>
+    });
+  </script>
 
   <section class="dbl-column flex ai-start">
     <article class="flex column ai-start single single-video dc-column">
@@ -112,16 +130,36 @@ $video_cover_src = get_the_post_thumbnail_url(get_the_ID(), 'full');
         </a>
       <?php } ?>
       <div class="video-content">
-        <a class="button-container button-48 download-button" href="javascript:" download onclick="saveFile('<?php echo $video_src; ?>')">
-          <div class="button-face green-button text-button">
-            <div class="button-text">دانلود این ویدیو</div>
-            <div class="button-glow"></div>
-            <div class="button-hover"></div>
-          </div>
-        </a>
-        <h2>توضیحات</h2>
-        <?php echo strip_tags_content($content, ["<a>", "<b>", "<i>", "<u>", "<strong>", "<em>", "<p>", "<br>"]); ?>
-      </div>
+        <div class="download-quality-field flex ai-center">
+          <h2>کیفیت دانلود:</h2>
+          <select name="pageNumber" class="pagination"
+            id="downloadQualitySelect" onchange="switchDownloadButton()">
+            <?php
+              foreach ($video_src_arr as $quality => $value)
+              {
+                echo "<option value='$quality'>$quality</option>";
+              }
+            ?>
+          </select>
+        </div>
+        <?php
+          foreach ($video_src_arr as $quality => $value)
+          {
+            echo "<a class='button-container button-48 download-button' href='javascript:' download data-quality='$quality'
+                style='display: none;'
+                onclick='saveFile($value)'>";
+              echo "<div class='button-face green-button text-button'>
+                <div class='button-text'>دانلود این ویدیو</div>
+                <div class='button-glow'></div>
+                <div class='button-hover'></div>
+              </div>
+            </a>";
+          }
+        ?>
+
+          <h2>توضیحات</h2>
+          <?php echo strip_tags_content($content, ["<a>", "<b>", "<i>", "<u>", "<strong>", "<em>", "<p>", "<br>"]); ?>
+        </div>
     </article>
     <?php if (!is_null($playlist)) { ?>
       <section class="dc-column playlist-posts">

@@ -1,4 +1,4 @@
-<script src="scripts/playerjs.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/scripts/playerjs.js"></script>
 <?php
 get_header();
 $page_type = 'ویدیو ها';
@@ -16,20 +16,35 @@ $args = array(
 );
 $query = new WP_Query($args);
 $found_posts_count = $query->found_posts;
+
 $content = get_the_content();
-$video_src = [];
-preg_match_all('/(src)=("[^"]*")/i', $content, $video_src);
-if (count($video_src[2]) > 0) {
-  $video_src = (str_replace('"', '', $video_src[2][0]));
-} else {
-  $video_src = null;
+$is_old = str_contains($content, '[videos]') === false;
+if($is_old){
+  $video_src = [];
+  preg_match_all('/(src)=("[^"]*")/i', $content, $video_src);
+  if (count($video_src[2]) > 0) {
+    $video_src = (str_replace('"', '', $video_src[2][0]));
+  } else {
+    $video_src = null;
+  }
+  $video_src_arr = [
+    '720p' => $video_src,
+  ];
 }
-$video_src_arr = [
-  '420p' => $video_src,
-  '720p' => $video_src,
-  '1080p'=>$video_src
-];
+else{
+  $from = strpos($content, "[videos]");
+  $to = strpos($content, "[/videos]");
+  $mycontent = substr($content,$from,($to-$from)+9);
+  $mycontent = do_shortcode($mycontent);
+  $mycontent = substr($mycontent, 0, -3) . "]";
+  $mycontent = json_decode($mycontent);
+  $video_src_arr = [];
+  foreach($mycontent as $key => $value){
+    $video_src_arr[$value->quality] = $value->src;
+  }
+}
 $video_cover_src = get_the_post_thumbnail_url(get_the_ID(), 'full');
+$content = strip_shortcodes($content);
 ?>
 <main class="main max-width">
   <header class="main-header relative">
@@ -88,15 +103,16 @@ $video_cover_src = get_the_post_thumbnail_url(get_the_ID(), 'full');
 
   <div id="player" class="main-video"></div>
   <script>
+    <?php
+      $files_str = "";
+      foreach ($video_src_arr as $quality => $value)
+      {
+        $files_str .= "[$quality]$video_src_arr[$quality],";
+      }
+    ?>
     var player = new Playerjs({
       id: 'player',
-      file:
-        <?php
-        foreach ($video_src_arr as $quality => $value)
-        {
-          echo "'[$quality] $video_src_arr[$quality]', +";
-        }
-        ?>
+      file: <?php echo "'$files_str'"; ?>
     });
   </script>
 
@@ -145,9 +161,8 @@ $video_cover_src = get_the_post_thumbnail_url(get_the_ID(), 'full');
         <?php
           foreach ($video_src_arr as $quality => $value)
           {
-            echo "<a class='button-container button-48 download-button' href='javascript:' download data-quality='$quality'
-                style='display: none;'
-                onclick='saveFile($value)'>";
+            echo "<a class='button-container button-48 download-button' href='https://dl.sammakqoran.com/?download=$value' download data-quality='$quality'
+                style='display: none;' target='_blank' >";
               echo "<div class='button-face green-button text-button'>
                 <div class='button-text'>دانلود این ویدیو</div>
                 <div class='button-glow'></div>

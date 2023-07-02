@@ -290,3 +290,17 @@ function display_pagination($query, $pageNumber)
     $output .= '</section>';
     echo $output;
 }
+
+// Add video shortcode
+function videoPlayerShortCode($atts, $content=null){
+    return "[" . do_shortcode($content) . "]";
+}
+add_shortcode('videos', 'videoPlayerShortCode');
+
+function videoShortCode($atts){
+    return '{
+		"src": "'.$atts['src'].'",
+		"quality": "'.$atts['quality'].'"
+	},';
+}
+add_shortcode('video', 'videoShortCode');
